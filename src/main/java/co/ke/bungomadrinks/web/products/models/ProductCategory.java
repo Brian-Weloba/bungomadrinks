@@ -1,12 +1,16 @@
 package co.ke.bungomadrinks.web.products.models;
 
+import javax.persistence.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+//@Entity
+//@Table(name = "product_categories")
 public class ProductCategory {
     private static AtomicInteger lastGeneratedId = new AtomicInteger(0);
+//    @Id
     private static int productCategoryId;
     private String CategoryName;
-    private String CategoryDescrioption;
+    private String CategoryDescription;
 
     public ProductCategory() {
         productCategoryId = getNextProductCategoryId();
@@ -33,10 +37,10 @@ public class ProductCategory {
     }
 
     public String getCategoryDescrioption() {
-        return CategoryDescrioption;
+        return CategoryDescription;
     }
 
     public void setCategoryDescrioption(String categoryDescrioption) {
-        CategoryDescrioption = categoryDescrioption;
+        CategoryDescription = categoryDescrioption;
     }
 }

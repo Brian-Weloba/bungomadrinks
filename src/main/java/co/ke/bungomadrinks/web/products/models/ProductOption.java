@@ -1,15 +1,18 @@
 package co.ke.bungomadrinks.web.products.models;
 
+import javax.persistence.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ProductOptions {
+//@Entity
+//@Table(name = "product_options")
+public class ProductOption {
     private static AtomicInteger lastGeneratedId = new AtomicInteger(0);
+//    @Id
     private static int productOptionId;
-    private int ProductId;
     private String OptionName;
     private float ProductOptionPrice;
 
-    public ProductOptions() {
+    public ProductOption() {
         this.productOptionId = getNextProductOptionsId();
     }
 
@@ -22,15 +25,7 @@ public class ProductOptions {
     }
 
     public static void setProductOptionId(int productOptionId) {
-        ProductOptions.productOptionId = productOptionId;
-    }
-
-    public int getProductId() {
-        return ProductId;
-    }
-
-    public void setProductId(int productId) {
-        ProductId = productId;
+        ProductOption.productOptionId = productOptionId;
     }
 
     public String getOptionName() {

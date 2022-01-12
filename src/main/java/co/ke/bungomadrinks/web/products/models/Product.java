@@ -1,12 +1,21 @@
 package co.ke.bungomadrinks.web.products.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Entity
+@Table(name = "Products")
 public class Product {
     private static AtomicInteger lastGeneratedId = new AtomicInteger(0);
-    private String productId;
+    @Id
+    private long productId;
     private final String productSKU;
     private String productName;
     private float basicProductPrice;
@@ -14,12 +23,15 @@ public class Product {
     private String productShortDescription;
     private String productLongDescription;
     private String productImage;
-    private int productCategoryId;
+    @Transient
+    private List<ProductCategory> productCategories;
     private Timestamp productUpdateDate;
     private Timestamp productCreateDate;
     private String productStatus;
     private int productStock;
     private String productType;
+    @Transient
+    private List<ProductOption> productOptions;
 
     public Product() {
         this.productId = getProductUniqueId();
@@ -37,7 +49,6 @@ public class Product {
         this.productShortDescription = productShortDescription;
         this.productLongDescription = productLongDescription;
         this.productImage = productImage;
-        this.productCategoryId = productCategoryId;
         this.productUpdateDate = new Timestamp(System.currentTimeMillis());
         this.productCreateDate = new Timestamp(System.currentTimeMillis());
         this.productStatus = productStatus;
@@ -46,12 +57,12 @@ public class Product {
     }
 
     //method to increment id
-    public static String getProductUniqueId() {
-        return String.valueOf(lastGeneratedId.incrementAndGet());
+    public static long getProductUniqueId() {
+        return lastGeneratedId.incrementAndGet();
     }
 
 
-    public String getProductId() {
+    public long getProductId() {
         return productId;
     }
 
@@ -107,12 +118,12 @@ public class Product {
         this.productImage = productImage;
     }
 
-    public int getProductCategoryId() {
-        return productCategoryId;
+    public List<ProductCategory> getProductCategoryId() {
+        return productCategories;
     }
 
-    public void setProductCategoryId(int productCategoryId) {
-        this.productCategoryId = productCategoryId;
+    public void setProductCategoryId(List<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
     }
 
     public Timestamp getProductUpdateDate() {
@@ -153,5 +164,75 @@ public class Product {
 
     public void setProductType(String productType) {
         this.productType = productType;
+    }
+
+    public void addProductCategory(ProductCategory productCategory) {
+        this.productCategories.add(productCategory);
+    }
+
+    public void removeProductCategory(ProductCategory productCategory) {
+        this.productCategories.remove(productCategory);
+    }
+
+    public void removeAllProductCategories() {
+        this.productCategories.clear();
+    }
+
+    public void setProductCategories(List<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
+    }
+
+    public List<ProductOption> getProductOptions() {
+        return productOptions;
+    }
+
+    public void setProductOptions(List<ProductOption> productOptions) {
+        this.productOptions = productOptions;
+    }
+
+    public void addProductOption(ProductOption productOption) {
+        this.productOptions.add(productOption);
+    }
+
+    public void removeProductOption(ProductOption productOption) {
+        this.productOptions.remove(productOption);
+    }
+
+    public void removeAllProductOptions() {
+        this.productOptions.clear();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(productId, product.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId='" + productId + '\'' +
+                ", productSKU='" + productSKU + '\'' +
+                ", productName='" + productName + '\'' +
+                ", basicProductPrice=" + basicProductPrice +
+                ", basicUnitVolume='" + basicUnitVolume + '\'' +
+                ", productShortDescription='" + productShortDescription + '\'' +
+                ", productLongDescription='" + productLongDescription + '\'' +
+                ", productImage='" + productImage + '\'' +
+                ", productCategories=" + productCategories +
+                ", productUpdateDate=" + productUpdateDate +
+                ", productCreateDate=" + productCreateDate +
+                ", productStatus='" + productStatus + '\'' +
+                ", productStock=" + productStock +
+                ", productType='" + productType + '\'' +
+                '}';
     }
 }
