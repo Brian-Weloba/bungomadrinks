@@ -5,54 +5,50 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 @Table(name = "Products")
 public class Product {
-    private static AtomicInteger lastGeneratedId = new AtomicInteger(0);
+    private static final AtomicInteger lastGeneratedId = new AtomicInteger(0);
     @Id
     private long productId;
-    private final String productSKU;
     private String productName;
-    private float basicProductPrice;
-    private String basicUnitVolume;
+    //    private float basicProductPrice;
+//    private String basicUnitVolume;
     private String productShortDescription;
     private String productLongDescription;
     private String productImage;
     @Transient
-    private List<ProductCategory> productCategories;
+    private List<ProductCategory> productCategories = new ArrayList<>();
     private Timestamp productUpdateDate;
     private Timestamp productCreateDate;
     private String productStatus;
+    @Transient
     private int productStock;
     private String productType;
     @Transient
-    private List<ProductOption> productOptions;
+    private List<ProductOption> productOptions = new ArrayList<>();
 
     public Product() {
         this.productId = getProductUniqueId();
-        this.productSKU = UUID.randomUUID().toString();
         this.productUpdateDate = new Timestamp(System.currentTimeMillis());
         this.productCreateDate = new Timestamp(System.currentTimeMillis());
     }
 
-    public Product(String productName, float basicProductPrice, String basicUnitVolume, String productShortDescription, String productLongDescription, String productImage, int productCategoryId, String productStatus, int productStock, String productType) {
+    public Product(String productName, String productShortDescription, String productLongDescription, String productImage, String productType) {
         this.productId = getProductUniqueId();
-        this.productSKU = UUID.randomUUID().toString();
         this.productName = productName;
-        this.basicProductPrice = basicProductPrice;
-        this.basicUnitVolume = basicUnitVolume;
+//        this.basicProductPrice = basicProductPrice;
+//        this.basicUnitVolume = basicUnitVolume;
         this.productShortDescription = productShortDescription;
         this.productLongDescription = productLongDescription;
         this.productImage = productImage;
         this.productUpdateDate = new Timestamp(System.currentTimeMillis());
         this.productCreateDate = new Timestamp(System.currentTimeMillis());
-        this.productStatus = productStatus;
-        this.productStock = productStock;
         this.productType = productType;
     }
 
@@ -61,13 +57,32 @@ public class Product {
         return lastGeneratedId.incrementAndGet();
     }
 
+    public void setStock() {
+        this.productStock = fetchProductStock();
+        this.productStatus = updateProductStatus();
+    }
+
+    public int fetchProductStock() {
+        int stock = 0;
+        for (ProductOption productOption : productOptions) {
+            if (productOption.getProductStock() > 0) {
+                stock += productOption.getProductStock();
+            }
+        }
+
+        return stock;
+    }
+
+    public String updateProductStatus() {
+        if (this.productStock > 0) {
+            return "Available";
+        } else {
+            return "Out of Stock";
+        }
+    }
 
     public long getProductId() {
         return productId;
-    }
-
-    public String getProductSKU() {
-        return productSKU;
     }
 
     public String getProductName() {
@@ -78,21 +93,21 @@ public class Product {
         this.productName = productName;
     }
 
-    public float getBasicProductPrice() {
-        return basicProductPrice;
-    }
-
-    public void setBasicProductPrice(float basicProductPrice) {
-        this.basicProductPrice = basicProductPrice;
-    }
-
-    public String getBasicUnitVolume() {
-        return basicUnitVolume;
-    }
-
-    public void setBasicUnitVolume(String basicUnitVolume) {
-        this.basicUnitVolume = basicUnitVolume;
-    }
+//    public float getBasicProductPrice() {
+//        return basicProductPrice;
+//    }
+//
+//    public void setBasicProductPrice(float basicProductPrice) {
+//        this.basicProductPrice = basicProductPrice;
+//    }
+//
+//    public String getBasicUnitVolume() {
+//        return basicUnitVolume;
+//    }
+//
+//    public void setBasicUnitVolume(String basicUnitVolume) {
+//        this.basicUnitVolume = basicUnitVolume;
+//    }
 
     public String getProductShortDescription() {
         return productShortDescription;
@@ -118,11 +133,11 @@ public class Product {
         this.productImage = productImage;
     }
 
-    public List<ProductCategory> getProductCategoryId() {
+    public List<ProductCategory> getProductCategories() {
         return productCategories;
     }
 
-    public void setProductCategoryId(List<ProductCategory> productCategories) {
+    public void setProductCategories(List<ProductCategory> productCategories) {
         this.productCategories = productCategories;
     }
 
@@ -178,10 +193,6 @@ public class Product {
         this.productCategories.clear();
     }
 
-    public void setProductCategories(List<ProductCategory> productCategories) {
-        this.productCategories = productCategories;
-    }
-
     public List<ProductOption> getProductOptions() {
         return productOptions;
     }
@@ -220,10 +231,9 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "productId='" + productId + '\'' +
-                ", productSKU='" + productSKU + '\'' +
                 ", productName='" + productName + '\'' +
-                ", basicProductPrice=" + basicProductPrice +
-                ", basicUnitVolume='" + basicUnitVolume + '\'' +
+//                ", basicProductPrice=" + basicProductPrice +
+//                ", basicUnitVolume='" + basicUnitVolume + '\'' +
                 ", productShortDescription='" + productShortDescription + '\'' +
                 ", productLongDescription='" + productLongDescription + '\'' +
                 ", productImage='" + productImage + '\'' +
@@ -234,5 +244,9 @@ public class Product {
                 ", productStock=" + productStock +
                 ", productType='" + productType + '\'' +
                 '}';
+    }
+
+    public void updateProductOption(Long optionId, ProductOption productOption) {
+
     }
 }
