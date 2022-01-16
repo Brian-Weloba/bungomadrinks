@@ -32,24 +32,24 @@ public class ProductService {
     public void addProducts() {
         prodRepository.saveProduct(new Product(
                 "Gilbey's",
-                "Gilbey's is a brand of gin that originated in the United Kingdom.",
+                "Gilbey's is a brand of gin, made in the United Kingdom, which is owned by the company of the same name. It is produced in the United Kingdom, and is sold in the United States and Europe.",
                 "Gilbey's is a brand of gin that originated in the United Kingdom.",
                 "https://www.thecocktaildb.com/images/media/drink/vqyxqp1487603168.jpg",
                 "Gin"));
 
         prodRepository.saveProduct(new Product(
                 "Bacardi",
-                "Bacardi is a brand of gin that originated in the United Kingdom.",
-                "Bacardi is a brand of gin that originated in the United Kingdom.",
+                "Bacardi is a brand of rum that originated in Cuba.",
+                "Based in Cuba, Bacardi is a brand of rum that originated in Cuba.",
                 "https://www.thecocktaildb.com/images/media/drink/vqyxqp1487603168.jpg",
-                "Gin"));
+                "Rum"));
 
         prodRepository.saveProduct(new Product(
                 "Jack Daniels",
-                "Jack Daniels is a brand of gin that originated in the United Kingdom.",
-                "Jack Daniels is a brand of gin that originated in the United Kingdom.",
+                "Jack Daniels is a brand of whiskey that originated in the United States.",
+                "Jack Daniels is a brand of whiskey that originated in the United States.",
                 "https://www.thecocktaildb.com/images/media/drink/vqyxqp1487603168.jpg",
-                "Gin"));
+                "Whisky"));
 
 
     }
