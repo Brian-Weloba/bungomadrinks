@@ -12,6 +12,7 @@ import {
     createTheme,
     CssBaseline,
     Grid,
+    IconButton,
     InputBase,
     Link,
     Toolbar,
@@ -19,6 +20,7 @@ import {
 } from "@mui/material";
 import {styled, ThemeProvider} from "@mui/styles";
 import SearchIcon from '@mui/icons-material/Search';
+import {VisibilityTwoTone} from "@mui/icons-material";
 
 const navbar = {
     backgroundColor: '#3a3d42',
@@ -56,17 +58,24 @@ const navElement = {
 const card = {
     borderRadius: '0px',
     boxShadow: '0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)',
-    border: '1px solid rgba(0,0,0,0.12)',
+    border: '1px solid #C96047',
+    backgroundColor: '#f4f4f4',
 };
 
-
-function onLinkEnter(e) {
-    e.target.style.color = '#C96047';
-    e.target.style.animationDuration = '5s';
+const img = {
+    maxWidth: 250,
+    minWidth: 200
 }
 
-function onLinkLeave(e) {
-    e.target.style.color = '#ffffff';
+const carddiv = {
+    justifyContent: 'center',
+    alignItems: 'center',
+}
+
+const icon = {
+    position: 'absolute',
+    left: '100px',
+
 }
 
 const Search = styled('div')(({theme}) => ({
@@ -110,6 +119,15 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
         },
     },
 }));
+
+function onLinkEnter(e) {
+    e.target.style.color = '#C96047';
+    e.target.style.animationDuration = '5s';
+}
+
+function onLinkLeave(e) {
+    e.target.style.color = '#ffffff';
+}
 
 const Navbar = () => {
 
@@ -222,40 +240,40 @@ const Products = () => {
 
     return products.map((product, index) => {
         const description = product.productShortDescription;
+        const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
         return (
-            <Grid item key={index}>
-                <Card sx={{maxWidth: 200}}
-                      style={card}>
-                    <CardMedia className="media"
-                               component="img"
-                               image="https://source.unsplash.com/random/200x200"
-                               height="200"
-                    />
-                    <CardHeader
-                        title={product.productName}
-                    />
-                    <CardContent>
-                        <Typography variant="body2" color="textPrimary" component="h1">
-                            {product.productType}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {description.slice(0, 50)}...
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-            // <div className="products" key={index}>
-            //     <br/>
-            //     <br/>
-            //     <h3>{product.productName}</h3>
-            //     <p>{product.productShortDescription}</p>
-            //     <p>{product.productStatus}</p>
-            //     <br/>
-            // </div>
+            <ThemeProvider theme={theme}>
+                <Grid item key={index}>
+                    <Card sx={{maxWidth: 250, minWidth: 200}}
+                          style={card}>
+                        <CardMedia className="media"
+                                   width="100"
+                        >
+                            <div style={carddiv}>
+                                <img style={img} src={image} alt="product"/>
+                                <IconButton style={icon}
+                                            variant="contained"
+                                            color={'secondary'}>
+                                    <VisibilityTwoTone/>
+                                </IconButton>
+                            </div>
+                        </CardMedia>
+                        <CardHeader
+                            title={product.productName}
+                        />
+                        <CardContent>
+                            <Typography variant="body2" color="textPrimary" component="h1">
+                                {product.productType}
+                            </Typography>
+                            {/*<Typography variant="body2" color="textSecondary" component="p">*/}
+                            {/*    {description.slice(0, 50)}...*/}
+                            {/*</Typography>*/}
+
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </ThemeProvider>
         )
-
-
-// return <h1>Hello</h1>
     });
 }
 

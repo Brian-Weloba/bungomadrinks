@@ -34,22 +34,43 @@ public class ProductService {
                 "Gilbey's",
                 "Gilbey's is a brand of gin, made in the United Kingdom, which is owned by the company of the same name. It is produced in the United Kingdom, and is sold in the United States and Europe.",
                 "Gilbey's is a brand of gin that originated in the United Kingdom.",
-                "https://www.thecocktaildb.com/images/media/drink/vqyxqp1487603168.jpg",
+                "gilbeys-gin.jpg",
                 "Gin"));
 
         prodRepository.saveProduct(new Product(
-                "Bacardi",
-                "Bacardi is a brand of rum that originated in Cuba.",
-                "Based in Cuba, Bacardi is a brand of rum that originated in Cuba.",
-                "https://www.thecocktaildb.com/images/media/drink/vqyxqp1487603168.jpg",
+                "Gordon's Gin",
+                "Gordon's Gin is a brand of gin, made in the United Kingdom.",
+                "Gordon's Gin is a brand of gin that originated in the United Kingdom.",
+                "GORDONS-GIN.jpg",
                 "Rum"));
 
         prodRepository.saveProduct(new Product(
-                "Jack Daniels",
-                "Jack Daniels is a brand of whiskey that originated in the United States.",
-                "Jack Daniels is a brand of whiskey that originated in the United States.",
-                "https://www.thecocktaildb.com/images/media/drink/vqyxqp1487603168.jpg",
-                "Whisky"));
+                "4th Street",
+                "4th Street is a wine made in the United States.",
+                "4th Street is a brand of wine that originated in the United States.",
+                "4-th-street.jpg",
+                "Wine"));
+
+        prodRepository.saveProduct(new Product(
+                "Bailey's",
+                "Bailey's is an Irish cream made in Ireland.",
+                "Baileys Original Irish Cream is the sweetest meeting of fine Irish whiskey and spirits, Irish dairy cream, rich chocolate and vanilla flavours.",
+                "bailey-s.jpg",
+                "Liquer"));
+
+        prodRepository.saveProduct(new Product(
+                "Amarula",
+                "Amarula is a brand of rum, made in the United States.",
+                "Amarula is a brand of rum that originated in the United States.",
+                "amarula.jpg",
+                "Liquer"));
+
+        prodRepository.saveProduct(new Product(
+                "Tanqueray",
+                "Tanqueray is a brand of rum, made in the United States.",
+                "Tanqueray is a brand of rum that originated in the United States.",
+                "tanqueray.jpg",
+                "Gin"));
 
 
     }
