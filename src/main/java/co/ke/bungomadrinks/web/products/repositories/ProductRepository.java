@@ -78,8 +78,7 @@ public class ProductRepository {
         Product productToUpdate = entityManager.find(Product.class, id);
         productToUpdate.setProductName(product.getProductName());
         productToUpdate.setProductImage(product.getProductImage());
-        productToUpdate.setProductShortDescription(product.getProductShortDescription());
-        productToUpdate.setProductLongDescription(product.getProductLongDescription());
+        productToUpdate.setProductDescription(product.getProductDescription());
         entityManager.persist(productToUpdate);
     }
 

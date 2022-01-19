@@ -2,6 +2,8 @@ import {AppBar, CssBaseline, InputBase, Link, Toolbar} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 import {styled} from "@mui/styles";
+import {Link as RouterLink} from "react-router-dom";
+
 const navbar = {
     backgroundColor: '#3a3d42',
 };
@@ -73,7 +75,6 @@ function onLinkLeave(e) {
 }
 
 
-
 const Navbar = () => {
 
     return (
@@ -86,7 +87,9 @@ const Navbar = () => {
                     justifyContent: 'space-between',
                 }}
             >
-                <img src={process.env.PUBLIC_URL + '/logo-white.png'} height={80}/>
+                <RouterLink to={"/"}>
+                    <img src={process.env.PUBLIC_URL + '/logo-white.png'} height={80}/>
+                </RouterLink>
                 <Search
                     style={{
                         right: '10px',

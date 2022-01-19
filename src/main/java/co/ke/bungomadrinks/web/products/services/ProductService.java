@@ -30,48 +30,54 @@ public class ProductService {
 
 
     public void addProducts() {
+
         prodRepository.saveProduct(new Product(
-                "Gilbey's",
-                "Gilbey's is a brand of gin, made in the United Kingdom, which is owned by the company of the same name. It is produced in the United Kingdom, and is sold in the United States and Europe.",
-                "Gilbey's is a brand of gin that originated in the United Kingdom.",
+                "Gilbey's London Gin",
+                3,
+                "Gilbey’s Gin is a classic juniper-led London Dry Gin. It is crystal clear with light, floral aromas of juniper along with hints of sweet orange. The palate is clean, light, and dry. Assertive and sharp with a presence of botanicals, juniper, bitter orange rind, and coriander. The finish is moderately long with lingering citrus notes. Gilbey’s Gin is distilled from grain neutral spirits along with 12 other botanicals. It has a reputation of being an inexpensive gin. It may be enjoyed on its own, part of a mixed drink, or a base for cocktails.",
                 "gilbeys-gin.jpg",
                 "Gin"));
 
         prodRepository.saveProduct(new Product(
-                "Gordon's Gin",
-                "Gordon's Gin is a brand of gin, made in the United Kingdom.",
-                "Gordon's Gin is a brand of gin that originated in the United Kingdom.",
+                "Gordon's London Dry Gin",
+                4,
+                "Almost 250 years ago, Alexander Gordon started his distillery in London and set about creating the recipe for a brilliant tasting gin. Gordon's high quality and distinctive juniper flavour has come to define the taste of the classic G&T. \n Gordon's today is a gin that's enjoyed, not dissected. It's the perfect gin to start a Friday evening, or a Tuesday night catch up with friends, where we share a moment and have a laugh with people we love.",
                 "GORDONS-GIN.jpg",
-                "Rum"));
+                "Gin"));
 
         prodRepository.saveProduct(new Product(
-                "4th Street",
-                "4th Street is a wine made in the United States.",
-                "4th Street is a brand of wine that originated in the United States.",
-                "4-th-street.jpg",
-                "Wine"));
+                "Johnnie Walker Red Label",
+                7,
+                "Flowers that bloom into flames. Johnnie Walker Red Label is the world’s best-selling Scotch Whisky. And is made for mixing, both in exhilarating cocktails and with your favorite people. It brings together whiskies specially chosen for their bold, vibrant flavors that add a fiery kick to any mix.",
+                "JOHNNIE-WALKER-RED.jpg",
+                "Whisky"));
 
         prodRepository.saveProduct(new Product(
-                "Bailey's",
-                "Bailey's is an Irish cream made in Ireland.",
-                "Baileys Original Irish Cream is the sweetest meeting of fine Irish whiskey and spirits, Irish dairy cream, rich chocolate and vanilla flavours.",
-                "bailey-s.jpg",
+                "Johnnie Walker Black Label",
+                9,
+                "Johnnie Walker Black Label is one of life’s true icons. A masterful blend of single malt and grain whiskies from across Scotland, aged for at least 12 years. The result is a timeless classic with depth and balance of flavor. Drink it with ice, neat or in a Highball.",
+                "johnnie-walker-black-label.jpg",
                 "Liquer"));
 
         prodRepository.saveProduct(new Product(
                 "Amarula",
-                "Amarula is a brand of rum, made in the United States.",
+//                10,
                 "Amarula is a brand of rum that originated in the United States.",
                 "amarula.jpg",
                 "Liquer"));
 
         prodRepository.saveProduct(new Product(
                 "Tanqueray",
-                "Tanqueray is a brand of rum, made in the United States.",
-                "Tanqueray is a brand of rum that originated in the United States.",
+//                11,
+                "Johnnie Walker Green Label is a hidden gem with vibrant secrets to reveal. And with malts from the four corners of Scotland, aged for at least 15 years, it captures the distinct flavors of each landscape in perfect balance. A whisky that’s in harmony with nature..",
                 "tanqueray.jpg",
                 "Gin"));
 
+        prodRepository.saveProduct(new Product(
+                "Cellar Cask Red",
+                "Cellar Cask Red is a brand of red wine that originated in the United States.",
+                "cellar-cask-red.jpg",
+                "Wine"));
 
     }
 

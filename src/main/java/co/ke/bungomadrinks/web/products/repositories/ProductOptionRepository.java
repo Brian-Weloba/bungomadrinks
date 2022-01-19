@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public class ProductOptionRepository {
@@ -33,5 +34,9 @@ public class ProductOptionRepository {
 
     public ProductOption getProductOptionById(Long optionId) {
         return entityManager.find(ProductOption.class, optionId);
+    }
+
+    public List<ProductOption> getAllProducts() {
+        return entityManager.createQuery("SELECT p FROM ProductOption p", ProductOption.class).getResultList();
     }
 }

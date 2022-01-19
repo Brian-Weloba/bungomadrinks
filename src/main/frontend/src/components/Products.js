@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Button, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography} from "@mui/material";
 import {ReadMore, Visibility} from "@mui/icons-material";
+import {Link} from "react-router-dom";
 
 const readMore = {
     backgroundColor: '#ec702a',
     borderRadius: '0%',
+    textDecoration: 'none',
 };
 
 
@@ -58,9 +60,10 @@ const icon = {
 
 const cardHeader = {
     color: '#3a3d42',
+    height: '70px',
 }
 
-const Products = () => {
+export const GetProducts = () => {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = () => {
@@ -74,31 +77,48 @@ const Products = () => {
         fetchProducts();
     }, []);
 
-    return products.map((product, index) => {
+    return products;
+};
+
+const Products = () => {
+
+
+    return GetProducts().map((product, index) => {
         const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
         const defaultOption = product.productOptions;
 
         // const prodOptions = defaultOption.map(defaultOption);
 
-        const getOption = () => {
-            let opt = defaultOption.find(option => option.productOptionId === product.defaultOption);
-            if(opt === undefined) {
-                return "1500".replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");;
-            }else {
+        const opt = defaultOption.find(option => option.productOptionId === product.defaultOption);
+
+        const getOptionPrice = () => {
+            if (opt === undefined) {
+                return "1500".replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                ;
+            } else {
                 return opt.productOptionPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
             }
         }
 
-        const option = getOption();
+        const getOptionVolume = () => {
+            if (opt === undefined) {
+                return " ";
+            } else {
+                return opt.optionVolume;
+            }
+        }
+
+        const optionPrice = getOptionPrice();
+        const optionVolume = getOptionVolume();
 
         // const defOption = defaultOption();
         console.log("viyrewgbiuvh")
-        console.log(option);
+        console.log(optionPrice);
 
         return (
 
             <Grid item key={index}>
-                <Card sx={{maxWidth: 300, minWidth: 250}}
+                <Card sx={{width:250, height: 'max-content'}}
                       variant="outlined"
                       style={card}>
                     <CardMedia onMouseEnter={onCardEnter} onMouseLeave={onCardExit} className="media"
@@ -113,26 +133,35 @@ const Products = () => {
                         </IconButton>
                     </CardMedia>
                     <CardHeader
-                        style={{textAlign: 'center'}}
+                        style={{
+                            paddingTop: '5px',
+
+                            alignContent: 'start',
+                            alignItems: 'baseline',
+
+                        }}
                         disableTypography={true}
                         title={
                             <Typography variant="h6" style={cardHeader}>
-                                {product.productName} - {product.productType}
+                                {product.productName} {optionVolume}
                             </Typography>
                         }
 
                         subheader={
                             <Typography variant="subtitle1">
-                                KES {option}
+                                KES {optionPrice}
                             </Typography>
                         }
                     />
                     <CardContent
                         style={{textAlign: 'center'}}
                     >
-                        <Button variant="contained" style={readMore}>
-                            Read More <ReadMore/>
-                        </Button>
+
+                        <Link to={`product/${product.productId}`}>
+                            <Button variant="contained" style={readMore}>
+                                Read More <ReadMore/>
+                            </Button>
+                        </Link>
 
                     </CardContent>
                 </Card>
@@ -141,7 +170,6 @@ const Products = () => {
         )
     });
 }
-
 
 
 export default Products;

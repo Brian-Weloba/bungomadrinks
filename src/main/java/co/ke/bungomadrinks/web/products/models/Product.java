@@ -1,9 +1,6 @@
 package co.ke.bungomadrinks.web.products.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +14,9 @@ public class Product {
     @Id
     private long productId;
     private String productName;
-    //    private float basicProductPrice;
-//    private String basicUnitVolume;
-    private String productShortDescription;
-    private String productLongDescription;
+    private int defaultOption;
+    @Column(columnDefinition = "TEXT")
+    private String productDescription;
     private String productImage;
     @Transient
     private List<ProductCategory> productCategories = new ArrayList<>();
@@ -39,13 +35,31 @@ public class Product {
         this.productCreateDate = new Timestamp(System.currentTimeMillis());
     }
 
-    public Product(String productName, String productShortDescription, String productLongDescription, String productImage, String productType) {
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+
+    public Product(String productName, String productDescription, String productImage, String productType) {
         this.productId = getProductUniqueId();
         this.productName = productName;
-//        this.basicProductPrice = basicProductPrice;
-//        this.basicUnitVolume = basicUnitVolume;
-        this.productShortDescription = productShortDescription;
-        this.productLongDescription = productLongDescription;
+        this.productDescription = productDescription;
+        this.productImage = productImage;
+        this.productUpdateDate = new Timestamp(System.currentTimeMillis());
+        this.productCreateDate = new Timestamp(System.currentTimeMillis());
+        this.productType = productType;
+    }
+
+    public Product(String productName, int defaultOption, String productDescription, String productImage, String productType) {
+        this.productId = getProductUniqueId();
+        this.productName = productName;
+        this.defaultOption = defaultOption;
+        this.productDescription = productDescription;
         this.productImage = productImage;
         this.productUpdateDate = new Timestamp(System.currentTimeMillis());
         this.productCreateDate = new Timestamp(System.currentTimeMillis());
@@ -81,6 +95,14 @@ public class Product {
         }
     }
 
+    public int getDefaultOption() {
+        return defaultOption;
+    }
+
+    public void setDefaultOption(int defaultOption) {
+        this.defaultOption = defaultOption;
+    }
+
     public long getProductId() {
         return productId;
     }
@@ -109,21 +131,21 @@ public class Product {
 //        this.basicUnitVolume = basicUnitVolume;
 //    }
 
-    public String getProductShortDescription() {
-        return productShortDescription;
-    }
-
-    public void setProductShortDescription(String productShortDescription) {
-        this.productShortDescription = productShortDescription;
-    }
-
-    public String getProductLongDescription() {
-        return productLongDescription;
-    }
-
-    public void setProductLongDescription(String productLongDescription) {
-        this.productLongDescription = productLongDescription;
-    }
+//    public String getProductShortDescription() {
+//        return productShortDescription;
+//    }
+//
+//    public void setProductShortDescription(String productShortDescription) {
+//        this.productShortDescription = productShortDescription;
+//    }
+//
+//    public String getProductLongDescription() {
+//        return productLongDescription;
+//    }
+//
+//    public void setProductLongDescription(String productLongDescription) {
+//        this.productLongDescription = productLongDescription;
+//    }
 
     public String getProductImage() {
         return productImage;
@@ -232,10 +254,7 @@ public class Product {
         return "Product{" +
                 "productId='" + productId + '\'' +
                 ", productName='" + productName + '\'' +
-//                ", basicProductPrice=" + basicProductPrice +
-//                ", basicUnitVolume='" + basicUnitVolume + '\'' +
-                ", productShortDescription='" + productShortDescription + '\'' +
-                ", productLongDescription='" + productLongDescription + '\'' +
+                ", productDescription='" + productDescription + '\'' +
                 ", productImage='" + productImage + '\'' +
                 ", productCategories=" + productCategories +
                 ", productUpdateDate=" + productUpdateDate +
