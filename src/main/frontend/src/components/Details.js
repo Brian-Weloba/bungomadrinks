@@ -16,71 +16,83 @@ import {
 } from "@mui/material";
 
 
-
 function Details() {
-    // const products = GetProducts();
-    // console.log(products);
-
-    let {id} = useParams();
+    let {id} = useParams()
     let url = "http://localhost:8081/api/products/" + id;
-    let prodOptionsUrl = "http://localhost:8081/api/products/"+id+"/options";
-    console.log(id);
+    let prodOptionsUrl = "http://localhost:8081/api/products/" + id + "/options";
 
-    const [product, setProduct] = useState([]);
+    console.log("url: " + url);
+    console.log("prodOptionsUrl: " + prodOptionsUrl);
+    console.log("id: " + id);
+
+
+    const [product, setProduct] = useState({});
     const [productOptions, setProductOptions] = useState([]);
-    const [selectedRadioButton, setSelectedRadioButton] = useState(product.defaultOption);
-
-    function onSizeClick(e){
-        setSelectedRadioButton(e.currentTarget.value);
-    }
+    const [defaultOpt, setdefaultOpt] = useState({});
+    const [price, setPrice] = useState(0);
 
 
-    const isRadioChecked = (value) =>{
-       return  selectedRadioButton === value;
-    }
-
-    const fetchProductOptions = ()=>{
-        axios.get(prodOptionsUrl)
+    const fetchDetails = async () => {
+        await axios.get(prodOptionsUrl)
             .then(res => {
                 setProductOptions(res.data);
-            })
-            .catch(err => {
-                console.log(err);
             });
-    };
 
 
-    const fetchProduct = () => {
-        axios.get(url).then(response => {
-            console.log("respone: ")
-            console.log(response);
+        console.log("productOptions: " + productOptions);
+
+        await axios.get(url).then(response => {
             setProduct(response.data);
         });
-    }
+
+        console.log("product: ", product);
+
+        let defaultOptUrl = "http://localhost:8081/api/products/" + id + "/options/" + product.defaultOption;
+
+        console.log("defaultOptUrl: " + defaultOptUrl);
+
+        await axios.get(defaultOptUrl).then(response => {
+            let defaultOptionObject = response.data;
+            console.log("defaultObject: ", defaultOptionObject);
+            setdefaultOpt(defaultOptionObject);
+            const optionPrice = defaultOptionObject.productOptionPrice;
+            setPrice(optionPrice);
+        });
+
+        console.log("defaultOpt: ", defaultOpt);
+        console.log("price: ", price);
+    };
 
     useEffect(() => {
-        fetchProduct();
-        fetchProductOptions();
+        console.log("useEffect");
+        fetchDetails();
     }, []);
+
+    const [selectedRadioButton, setSelectedRadioButton] = useState(0);
 
     const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
 
+    function handleChange(e) {
+        console.log("e: ", typeof e.target.value);
+        setSelectedRadioButton(e.target.value);
+        console.log("productOptions: ", productOptions);
 
+        let optionPrice = productOptions.find(option => option.productOptionId === Number(e.target.value)).productOptionPrice;
+        setPrice(optionPrice);
 
-    const opt = product.productOptions;
-    console.log("opt:", opt);
+    }
 
     const Options = () => {
 
-       return productOptions.map((option, index) => {
-           return (
-            <FormControlLabel
-                key={index}
-                value={option.productOptionId}
-                control={<Radio/>}
-                label={option.optionVolume}
-            />
-           )
+        return productOptions.map((option, index) => {
+            return (
+                <FormControlLabel
+                    key={index}
+                    value={option.productOptionId}
+                    control={<Radio/>}
+                    label={option.optionVolume}
+                />
+            )
         });
 
     }
@@ -110,7 +122,7 @@ function Details() {
                             {product.productName}
                         </Typography>
                         <Typography component={"div"} variant={"h5"}>
-                            {product.productPrice}
+                            KES {price}
                         </Typography>
                         <FormControl>
                             <FormLabel id="demo-row-radio-buttons-group-label">Size</FormLabel>
@@ -118,18 +130,20 @@ function Details() {
                                 row
                                 aria-labelledby="demo-row-radio-buttons-group-label"
                                 name="row-radio-buttons-group"
+                                onChange={handleChange}
+                                value={selectedRadioButton}
+                                defaultValue={defaultOpt.defaultOptionId}
                             >
                                 <Options/>
                             </RadioGroup>
                         </FormControl>
-
                         <Typography component={"div"} variant={"subtitle1"}>
                             {product.productDescription}
                         </Typography>
-
                     </CardContent>
                 </Box>
             </Card>
+            {/*<Reccomended/>*/}
         </Container>
     );
 

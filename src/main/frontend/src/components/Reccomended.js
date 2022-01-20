@@ -143,7 +143,7 @@ const Products = () => {
                         disableTypography={true}
                         title={
                             <Typography variant="h6" style={cardHeader}>
-                                {product.productName} - {optionVolume}
+                                {product.productName} {optionVolume}
                             </Typography>
                         }
 
