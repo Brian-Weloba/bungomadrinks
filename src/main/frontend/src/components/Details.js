@@ -139,7 +139,7 @@ function Details() {
                             {product.productName}
                         </Typography>
                         <Typography component={"div"} variant={"h5"}>
-                            {price}                        </Typography>
+                            KES {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}                        </Typography>
                         <FormControl>
                             <FormLabel id="demo-row-radio-buttons-group-label">Size</FormLabel>
                             <RadioGroup

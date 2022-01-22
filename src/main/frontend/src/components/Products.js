@@ -7,7 +7,6 @@ import {
     CardContent,
     CardHeader,
     CardMedia,
-    Container,
     Dialog,
     DialogContent,
     DialogTitle,
@@ -74,7 +73,7 @@ const icon = {
 }
 
 const cardHeader = {
-    color: '#3a3d42',
+    color: '#211f2a',
     height: '70px',
 }
 
@@ -218,19 +217,18 @@ const Home = () => {
         }
 
         return (
-            <Container
+            <Box
                 style={{
+                    backgroundColor: '#fafafa',
                     width: '100%',
-                    paddingLeft: '10px',
-                    paddingRight: '10px',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
+                    paddingLeft: '20px',
+                    paddingRight: '20px',
                 }}
             >
                 <Grid
                     style={{
                         height: "max-content",
-                        marginTop: '50px',
+                        paddingTop: '50px',
                         justifyContent: 'center',
                         alignItems: 'stretch',
                     }}
@@ -281,7 +279,7 @@ const Home = () => {
                         </Link>
                     </DialogActions>
                 </Dialog>
-            </Container>
+            </Box>
         )
     }
 

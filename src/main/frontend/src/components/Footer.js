@@ -27,12 +27,12 @@ const Copyright = () => {
         <BottomNavigation
             style={{
                 alignText: 'center',
-                backgroundColor: '#3a3d42',
+                backgroundColor: '#211f2a',
                 display: 'flex',
                 justifyContent: 'center',
                 padding: '10px',
                 height: 'max-content',
-                color: '#ffffff',
+                color: '#675b4f',
             }}>
             <Typography variant={'p'}
             >
@@ -49,7 +49,7 @@ const BottomNav = () => {
     return (
         <BottomNavigation
             style={{
-                backgroundColor: '#3a3d42',
+                backgroundColor: '#211f2a',
                 display: 'flex',
                 justifyContent: 'space-between',
                 padding: '10px',
@@ -99,7 +99,7 @@ const BottomNav = () => {
                     </Grid>
                 </Grid>
             </Box>
-            <Divider orientation="vertical" variant="middle" flexItem/>
+            <Divider color={'#675b4f'} orientation="vertical" variant="middle" flexItem/>
             <Box style={box}>
                 <h3>CONTACT US</h3>
                 <Grid container>
@@ -121,7 +121,7 @@ const BottomNav = () => {
                     </Grid>
                 </Grid>
             </Box>
-            <Divider orientation="vertical" variant="middle" flexItem/>
+            <Divider color={'#675b4f'} orientation="vertical" variant="middle" flexItem/>
             <Box style={box}>
                 <h3>INFORMATION</h3>
                 <Grid container>

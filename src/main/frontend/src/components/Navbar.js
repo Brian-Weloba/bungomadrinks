@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 }));
 
 function onLinkEnter(e) {
-    e.target.style.color = '#ec702a';
+    e.target.style.color = '#a71e22';
     e.target.style.animationDuration = '5s';
 }
 
