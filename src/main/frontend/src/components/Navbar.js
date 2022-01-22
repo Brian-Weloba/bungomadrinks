@@ -5,35 +5,24 @@ import {styled} from "@mui/styles";
 import {Link as RouterLink} from "react-router-dom";
 
 const navbar = {
-    backgroundColor: '#3a3d42',
+    backgroundColor: '#211F2A',
 };
 
 
 const categories = {
-    animationDuration: '3s',
+    animationDuration: '3s', textDecoration: 'none',
 };
 
 
 const navElement = {
-    color: '#ffffff',
-    fontSize: '12pt',
-    fontWeight: 'bold',
-    paddingRight: '10px',
-    cursor: 'pointer',
+    color: '#ffffff', fontSize: '12pt', fontWeight: 'bold', paddingRight: '10px', cursor: 'pointer',
 };
 
 const Search = styled('div')(({theme}) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#ffffff',
-    '&:hover': {
+    position: 'relative', borderRadius: theme.shape.borderRadius, backgroundColor: '#ffffff', '&:hover': {
         backgroundColor: '#ffffff',
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: 1,
-        width: 'auto',
+    }, marginLeft: 0, width: '100%', [theme.breakpoints.up('sm')]: {
+        marginLeft: 1, width: 'auto',
     },
 }));
 
@@ -49,16 +38,13 @@ const SearchIconWrapper = styled('div')(({theme}) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({theme}) => ({
-    color: '#3a3d42',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
+    color: '#3a3d42', '& .MuiInputBase-input': {
+        padding: theme.spacing(1, 1, 1, 0), // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
+            width: '12ch', '&:focus': {
                 width: '20ch',
             },
         },
@@ -77,14 +63,11 @@ function onLinkLeave(e) {
 
 const Navbar = () => {
 
-    return (
-        <AppBar position="static" style={navbar}>
+    return (<AppBar position="static" style={navbar}>
             <CssBaseline/>
             <Toolbar
                 style={{
-                    paddingTop: '10px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
+                    paddingTop: '10px', display: 'flex', justifyContent: 'space-between',
                 }}
             >
                 <RouterLink to={"/"}>
@@ -106,10 +89,11 @@ const Navbar = () => {
             </Toolbar>
             <Toolbar>
                 <div style={categories}>
-                    <Link onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/" style={navElement}>
-                        Whiskey
+                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
+                          style={navElement}>
+                        Whisky
                     </Link>
-                    <Link onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
+                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
                           style={navElement}
                     >
                         Gin
@@ -121,31 +105,29 @@ const Navbar = () => {
                     >
                         Rum
                     </Link>
-                    <Link onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
+                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
                           style={navElement}
                     >
                         Brandy
                     </Link>
-                    <Link onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
+                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
                           style={navElement}
                     >
                         Vodka
                     </Link>
-                    <Link onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
+                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
                           style={navElement}
                     >
                         Wines
                     </Link>
-                    <Link onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
+                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
                           style={navElement}
                     >
                         Cans
                     </Link>
                 </div>
             </Toolbar>
-        </AppBar>
-    )
-        ;
+        </AppBar>);
 }
 
 export default Navbar;

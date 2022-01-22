@@ -17,58 +17,71 @@ import {
 
 
 function Details() {
+
+
     let {id} = useParams()
     let url = "http://localhost:8081/api/products/" + id;
     let prodOptionsUrl = "http://localhost:8081/api/products/" + id + "/options";
 
-    console.log("url: " + url);
-    console.log("prodOptionsUrl: " + prodOptionsUrl);
-    console.log("id: " + id);
+    // let defaultOption = {};
+    // let price = 0;
+    // let selectedOption = 0;
+    // let selectedRadioButton = 0;
+
+    // console.log("url: " + url);
+    // console.log("prodOptionsUrl: " + prodOptionsUrl);
+    // console.log("id: " + id);
 
 
     const [product, setProduct] = useState({});
     const [productOptions, setProductOptions] = useState([]);
-    const [defaultOpt, setdefaultOpt] = useState({});
+    const [defaultOption, setDefaultOption] = useState({});
     const [price, setPrice] = useState(0);
+    const [selectedOption, setSelectedOption] = useState(0);
+    const [selectedRadioButton, setSelectedRadioButton] = useState(0);
+
+    const fetchDetails = () => {
 
 
-    const fetchDetails = async () => {
-        await axios.get(prodOptionsUrl)
+        axios.get(prodOptionsUrl)
             .then(res => {
+                console.log("productOptions Res: ", res.data);
                 setProductOptions(res.data);
+                console.log("product ip:", product);
             });
 
-
-        console.log("productOptions: " + productOptions);
-
-        await axios.get(url).then(response => {
+        axios.get(url).then(response => {
+            // console.log("product res: ", response.data);
             setProduct(response.data);
+            const prod = response.data;
+            console.log("response.data: ", response.data);
+            console.log("product == ", prod);
+            const defaultOptionObject = prod.productOptions
+            console.log("defaultOptionObject: ", defaultOptionObject);
+            console.log("dOO", typeof defaultOptionObject[0].productOptionId);
+            const defOpt = defaultOptionObject.find(option => option.productOptionId === prod.defaultOption);
+            setDefaultOption(defOpt);
+            console.log("defaultOption: ", defOpt);
+            setPrice(defOpt.productOptionPrice);
+            setSelectedOption(defOpt.productOptionId);
+            console.log("price: ", price);
+            console.log("selectedOption: ", selectedOption);
+            setSelectedRadioButton(defOpt.productOptionId);
+
         });
 
-        console.log("product: ", product);
+    }
 
-        let defaultOptUrl = "http://localhost:8081/api/products/" + id + "/options/" + product.defaultOption;
-
-        console.log("defaultOptUrl: " + defaultOptUrl);
-
-        await axios.get(defaultOptUrl).then(response => {
-            let defaultOptionObject = response.data;
-            console.log("defaultObject: ", defaultOptionObject);
-            setdefaultOpt(defaultOptionObject);
-            const optionPrice = defaultOptionObject.productOptionPrice;
-            setPrice(optionPrice);
-        });
-
-        console.log("defaultOpt: ", defaultOpt);
-        console.log("price: ", price);
-    };
 
     useEffect(() => {
-        console.log("useEffect");
         fetchDetails();
     }, []);
 
-    const [selectedRadioButton, setSelectedRadioButton] = useState(0);
+
+// console.log("useEffect product: ", product);
+// console.log("prod: ", product);
+// console.log("prodOptions: ", productOptions);
+
 
     const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
 
@@ -82,8 +95,12 @@ function Details() {
 
     }
 
-    const Options = () => {
+// const defOpt = product.productOptions.find(option => option.productOptionId === Number(product.defaultOption));
+// console.log("defOpt: ", defOpt);
+// const defPrice = productOptions.find(option => option.productOptionId === Number(defaultOpt.productOptionId)).productOptionPrice;
 
+    const Options = () => {
+        // fetchPrice(product);
         return productOptions.map((option, index) => {
             return (
                 <FormControlLabel
@@ -122,8 +139,7 @@ function Details() {
                             {product.productName}
                         </Typography>
                         <Typography component={"div"} variant={"h5"}>
-                            KES {price}
-                        </Typography>
+                            {price}                        </Typography>
                         <FormControl>
                             <FormLabel id="demo-row-radio-buttons-group-label">Size</FormLabel>
                             <RadioGroup
@@ -132,7 +148,7 @@ function Details() {
                                 name="row-radio-buttons-group"
                                 onChange={handleChange}
                                 value={selectedRadioButton}
-                                defaultValue={defaultOpt.defaultOptionId}
+                                defaultValue={selectedRadioButton}
                             >
                                 <Options/>
                             </RadioGroup>
