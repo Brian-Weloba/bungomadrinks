@@ -1,8 +1,23 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Button, Card, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography} from "@mui/material";
-import {ReadMore, Visibility} from "@mui/icons-material";
+import {
+    Box,
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    Container,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    IconButton,
+    Typography
+} from "@mui/material";
+import {Close, ReadMore, Visibility} from "@mui/icons-material";
 import {Link} from "react-router-dom";
+import DialogActions from '@mui/material/DialogActions';
 
 const readMore = {
     backgroundColor: '#ec702a',
@@ -63,6 +78,7 @@ const cardHeader = {
     height: '70px',
 }
 
+
 export const GetProducts = () => {
     const [products, setProducts] = useState([]);
 
@@ -80,96 +96,199 @@ export const GetProducts = () => {
     return products;
 };
 
-const Products = () => {
+const Home = () => {
+    const [open, setOpen] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+    const [productId, setProductId] = useState('');
+    const ProductsGrid = () => {
 
 
-    return GetProducts().map((product, index) => {
-        const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
-        const defaultOption = product.productOptions;
-
-        // const prodOptions = defaultOption.map(defaultOption);
-
-        const opt = defaultOption.find(option => option.productOptionId === product.defaultOption);
-
-        const getOptionPrice = () => {
-            if (opt === undefined) {
-                return "1500".replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                ;
-            } else {
-                return opt.productOptionPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-            }
+        function handleOpen(img, id) {
+            setOpen(true);
+            setImageUrl(img);
+            setProductId(id);
         }
 
-        const getOptionVolume = () => {
-            if (opt === undefined) {
-                return " ";
-            } else {
-                return opt.optionVolume;
-            }
+
+        const FullscreenImage = (image) => {
+            return (
+                <Box>
+                    <img src={image} alt=""/>
+                </Box>
+            )
         }
 
-        const optionPrice = getOptionPrice();
-        const optionVolume = getOptionVolume();
+        return GetProducts().map((product, index) => {
+            const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
+            const defaultOption = product.productOptions;
 
-        // const defOption = defaultOption();
-        console.log("viyrewgbiuvh")
-        console.log(optionPrice);
+            // const prodOptions = defaultOption.map(defaultOption);
+
+            const opt = defaultOption.find(option => option.productOptionId === product.defaultOption);
+
+            const getOptionPrice = () => {
+                if (opt === undefined) {
+                    return "1500".replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+
+                } else {
+                    return opt.productOptionPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                }
+            }
+
+            const getOptionVolume = () => {
+                if (opt === undefined) {
+                    return " ";
+                } else {
+                    return opt.optionVolume;
+                }
+            }
+
+            const optionPrice = getOptionPrice();
+            const optionVolume = getOptionVolume();
+
+            // const defOption = defaultOption();
+            console.log("viyrewgbiuvh")
+            console.log(optionPrice);
+
+            return (
+                <Grid item key={index}>
+                    <Card sx={{width: 250, height: 'max-content'}}
+                          variant="outlined"
+                          style={card}>
+                        <CardMedia onClick={() => handleOpen(image, product.productId)} onMouseEnter={onCardEnter}
+                                   onMouseLeave={onCardExit}
+                                   className="media"
+                                   width="100"
+                                   style={carddiv}
+                        >
+                            <img style={img} src={image} alt="product"/>
+                            <IconButton className='button' style={icon}>
+                                <Visibility
+                                    fontSize="large"
+                                />
+                            </IconButton>
+                        </CardMedia>
+                        <CardHeader
+                            style={{
+                                paddingTop: '5px',
+
+                                alignContent: 'start',
+                                alignItems: 'baseline',
+
+                            }}
+                            disableTypography={true}
+                            title={
+                                <Typography variant="h6" style={cardHeader}>
+                                    {product.productName} - {optionVolume}
+                                </Typography>
+                            }
+
+                            subheader={
+                                <Typography variant="subtitle1">
+                                    KES {optionPrice}
+                                </Typography>
+                            }
+                        />
+                        <CardContent
+                            style={{textAlign: 'center'}}
+                        >
+
+                            <Link to={`product/${product.productId}`}
+                                  style={{
+                                      textDecoration: 'none',
+                                  }}>
+                                <Button variant="contained" style={readMore}>
+                                    Read More <ReadMore/>
+                                </Button>
+                            </Link>
+
+                        </CardContent>
+                    </Card>
+                </Grid>
+            )
+
+
+        });
+    }
+
+    const Products = () => {
+
+        function handleClose() {
+            setOpen(false);
+        }
 
         return (
+            <Container
+                style={{
+                    width: '100%',
+                    paddingLeft: '10px',
+                    paddingRight: '10px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                }}
+            >
+                <Grid
+                    style={{
+                        height: "max-content",
+                        marginTop: '50px',
+                        justifyContent: 'center',
+                        alignItems: 'stretch',
+                    }}
+                    container
+                    justify={'center'}
+                >
+                    <ProductsGrid/>
+                </Grid>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    keepMounted
 
-            <Grid item key={index}>
-                <Card sx={{width:250, height: 'max-content'}}
-                      variant="outlined"
-                      style={card}>
-                    <CardMedia onMouseEnter={onCardEnter} onMouseLeave={onCardExit} className="media"
-                               width="100"
-                               style={carddiv}
-                    >
-                        <img style={img} src={image} alt="product"/>
-                        <IconButton className='button' style={icon}>
-                            <Visibility
-                                fontSize="large"
-                            />
+                >
+                    <DialogTitle style={{
+                        display: 'flex',
+                        justifyContent: 'end',
+                    }}>
+                        <IconButton>
+                            <Close style={{}} fontSize={'large'} onClick={handleClose}/>
                         </IconButton>
-                    </CardMedia>
-                    <CardHeader
+                    </DialogTitle>
+                    <DialogContent
                         style={{
-                            paddingTop: '5px',
-
-                            alignContent: 'start',
-                            alignItems: 'baseline',
-
+                            overflow: 'hidden',
                         }}
-                        disableTypography={true}
-                        title={
-                            <Typography variant="h6" style={cardHeader}>
-                                {product.productName} - {optionVolume}
-                            </Typography>
-                        }
 
-                        subheader={
-                            <Typography variant="subtitle1">
-                                KES {optionPrice}
-                            </Typography>
-                        }
-                    />
-                    <CardContent
-                        style={{textAlign: 'center'}}
                     >
+                        <img style={{
+                            objectFit: 'contain',
+                            height: "100%",
+                            width: "100%",
+                            maxWidth: '600px',
+                            maxHeight: '500px',
 
-                        <Link to={`product/${product.productId}`}>
+                        }} src={imageUrl} alt="product">
+
+                        </img>
+                    </DialogContent>
+                    <DialogActions>
+                        <Link to={`product/${productId}`}
+                              style={{
+                                  textDecoration: 'none',
+                              }}>
                             <Button variant="contained" style={readMore}>
                                 Read More <ReadMore/>
                             </Button>
                         </Link>
-
-                    </CardContent>
-                </Card>
-            </Grid>
-
+                    </DialogActions>
+                </Dialog>
+            </Container>
         )
-    });
+    }
+
+    return (
+        <Products/>
+    )
 }
 
 
-export default Products;
+export default Home;
