@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./Home";
 import Details from "./Details";
 import Products from "./Products";
+import ProductsByCategory from "./ProductsByCategory";
 
 const theme = createTheme({
     shape: {
@@ -33,6 +34,7 @@ function App() {
                 <Navbar/>
                 <Routes>
                     <Route exact path="/" element={<Products/>}/>
+                    <Route path="category/:name" element={<ProductsByCategory/>}/>
                     <Route path={"product/:id"} element={<Details/>}/>
                 </Routes>
                 <Footer/>

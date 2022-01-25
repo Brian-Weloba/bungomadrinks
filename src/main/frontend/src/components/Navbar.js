@@ -1,4 +1,4 @@
-import {AppBar, CssBaseline, InputBase, Link, Toolbar} from "@mui/material";
+import {AppBar, Box, CssBaseline, InputBase, Toolbar} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 import {styled} from "@mui/styles";
@@ -6,6 +6,7 @@ import {Link as RouterLink} from "react-router-dom";
 
 const navbar = {
     backgroundColor: '#211F2A',
+
 };
 
 
@@ -15,7 +16,12 @@ const categories = {
 
 
 const navElement = {
-    color: '#ffffff', fontSize: '12pt', fontWeight: 'bold', paddingRight: '10px', cursor: 'pointer',
+    color: '#ffffff',
+    fontSize: '12pt',
+    fontWeight: 'bold',
+    paddingRight: '10px',
+    cursor: 'pointer',
+    textDecoration: 'none',
 };
 
 const Search = styled('div')(({theme}) => ({
@@ -52,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 }));
 
 function onLinkEnter(e) {
-    e.target.style.color = '#a71e22';
+    e.target.style.color = '#ec702a';
     e.target.style.animationDuration = '5s';
 }
 
@@ -63,70 +69,87 @@ function onLinkLeave(e) {
 
 const Navbar = () => {
 
-    return (<AppBar position="static" style={navbar}>
+    return (
+        <AppBar position="static" style={navbar}>
             <CssBaseline/>
-            <Toolbar
-                style={{
-                    paddingTop: '10px', display: 'flex', justifyContent: 'space-between',
-                }}
-            >
-                <RouterLink to={"/"}>
-                    <img src={process.env.PUBLIC_URL + '/logo-white.png'} height={80}/>
-                </RouterLink>
-                <Search
+            <Box style={{
+                boxShadow: "rgba(0, 0, 0, 0.3) 1px 3px 10px 3px",
+            }}>
+                <Toolbar
                     style={{
-                        right: '10px',
+                        paddingTop: '10px', display: 'flex', justifyContent: 'space-between',
                     }}
                 >
-                    <SearchIconWrapper>
-                        <SearchIcon/>
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{'aria-label': 'search'}}
-                    />
-                </Search>
-            </Toolbar>
-            <Toolbar>
-                <div style={categories}>
-                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
-                          style={navElement}>
-                        Whisky
-                    </Link>
-                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
-                          style={navElement}
+                    <RouterLink to={"/"}>
+                        <img src={process.env.PUBLIC_URL + '/logo.png'} height={80} alt={"berny's home"}/>
+                    </RouterLink>
+
+                </Toolbar>
+                <Toolbar
+                    style={{
+
+                        paddingTop: '5px', display: 'flex', justifyContent: 'space-between',
+                    }}
+                >
+                    <div style={categories}>
+                        <RouterLink to={"category/whisky"} underline={'none'} onMouseEnter={onLinkEnter}
+                                    onMouseLeave={onLinkLeave}
+                                    style={navElement}>
+                            Whisky
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/gin"
+                                    style={navElement}
+                        >
+                            Gin
+                        </RouterLink>
+                        <RouterLink
+                            underline={'hover'}
+                            onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to={"category/rum"}
+                            style={navElement}
+                        >
+                            Rum
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/brandy"
+                                    style={navElement}
+                        >
+                            Brandy
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/vodka"
+                                    style={navElement}
+                        >
+                            Vodka
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/wines"
+                                    style={navElement}
+                        >
+                            Wines
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/cans"
+                                    style={navElement}
+                        >
+                            Cans
+                        </RouterLink>
+                    </div>
+                    <Search
+                        style={{
+                            right: '10px',
+                        }}
                     >
-                        Gin
-                    </Link>
-                    <Link
-                        underline={'hover'}
-                        onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
-                        style={navElement}
-                    >
-                        Rum
-                    </Link>
-                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
-                          style={navElement}
-                    >
-                        Brandy
-                    </Link>
-                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
-                          style={navElement}
-                    >
-                        Vodka
-                    </Link>
-                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
-                          style={navElement}
-                    >
-                        Wines
-                    </Link>
-                    <Link underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to="/"
-                          style={navElement}
-                    >
-                        Cans
-                    </Link>
-                </div>
-            </Toolbar>
+                        <SearchIconWrapper>
+                            <SearchIcon/>
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            placeholder="Search…"
+                            inputProps={{'aria-label': 'search'}}
+                        />
+                    </Search>
+                </Toolbar>
+            </Box>
         </AppBar>);
 }
 

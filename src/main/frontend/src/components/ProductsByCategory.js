@@ -27,8 +27,7 @@ const readMore = {
 
 const card = {
     borderRadius: '0px',
-    margin: '10px',
-    // boxShadow: '0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)',
+    boxShadow: '0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)',
     border: '1px solid #ebebea',
     backgroundColor: '#ffffff',
     display: 'flex',
@@ -78,12 +77,11 @@ const cardHeader = {
     height: '70px',
 }
 
-
-export const GetProducts = () => {
+function  GetProducts(name) {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = () => {
-        axios.get("http://localhost:8081/api/products").then(response => {
+        axios.get(`http://localhost:8081/api/products/categories/get?name=${name}`).then(response => {
             // console.log(response);
             setProducts(response.data);
         });
@@ -96,11 +94,13 @@ export const GetProducts = () => {
     return products;
 };
 
-const Home = () => {
-    let {name} = useParams();
+const ProductsByCategory = () => {
     const [open, setOpen] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
     const [productId, setProductId] = useState('');
+
+    let {name} = useParams();
+
     const ProductsGrid = () => {
 
 
@@ -154,18 +154,16 @@ const Home = () => {
             return (
                 <Grid item key={index}>
                     <Card sx={{width: 250, height: 'max-content'}}
-                          // variant="outlined"
-                          raised={true}
+                          variant="outlined"
                           style={card}>
-                        <CardMedia onMouseEnter={onCardEnter}
-                                   onMouseLeave={onCardExit}
-                                   className="media"
-                                   width="100"
-                                   style={carddiv}
+                        <CardMedia  onMouseEnter={onCardEnter}
+                                    onMouseLeave={onCardExit}
+                                    className="media"
+                                    width="100"
+                                    style={carddiv}
                         >
                             <img style={img} src={image} alt="product"/>
-                            <IconButton onClick={() => handleOpen(image, product.productId)} className='button'
-                                        style={icon}>
+                            <IconButton onClick={() => handleOpen(image, product.productId)} className='button' style={icon}>
                                 <Visibility
                                     fontSize="large"
                                 />
@@ -220,15 +218,10 @@ const Home = () => {
             setOpen(false);
         }
 
-        const bg = process.env.PUBLIC_URL + '/rainbow-vortex.svg';
-
         return (
             <Box
                 style={{
-                    backgroundColor: '#ff9d00',
-                    backgroundImage: `url(${bg})`,
-                    backgroundAttachment: 'scroll',
-                    backgroundSize: 'cover',
+                    backgroundColor: '#fafafa',
                     width: 'fit-content',
                     paddingLeft: '20px',
                     paddingRight: '20px',
@@ -246,8 +239,8 @@ const Home = () => {
                         alignItems: 'flex-start',
                         alignContent: 'flex-start',
                         alignSelf: 'flex-start',
-                        paddingTop: '20px',
-                        paddingBottom: '50px',
+                        marginTop: '20px',
+                        marginBottom: '20px',
                     }}
                     container
                 >
@@ -264,7 +257,7 @@ const Home = () => {
                         justifyContent: 'end',
                     }}>
                         <IconButton onClick={handleClose}>
-                            <Close style={{}} fontSize={'large'}/>
+                            <Close style={{}} fontSize={'large'} />
                         </IconButton>
                     </DialogTitle>
                     <DialogContent
@@ -305,4 +298,4 @@ const Home = () => {
 }
 
 
-export default Home;
+export default ProductsByCategory;

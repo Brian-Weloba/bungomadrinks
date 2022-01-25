@@ -1,5 +1,6 @@
 package co.ke.bungomadrinks.web.products.controllers;
 
+import co.ke.bungomadrinks.web.products.models.Product;
 import co.ke.bungomadrinks.web.products.models.ProductCategory;
 import co.ke.bungomadrinks.web.products.services.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,10 @@ public class ProductCategoriesController {
     @PutMapping
     public void updateProductCategory(@RequestBody ProductCategory productCategory) {
         productCategoryService.updateProductCategory(productCategory);
+    }
+
+    @GetMapping("/get")
+    public List<Product> getAllProductsByCategoryName(@RequestParam("name") String name) {
+        return productCategoryService.getAllProductsByCategoryName(name);
     }
 }

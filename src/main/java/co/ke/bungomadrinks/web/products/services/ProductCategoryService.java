@@ -1,20 +1,25 @@
 package co.ke.bungomadrinks.web.products.services;
 
+import co.ke.bungomadrinks.web.products.models.Product;
 import co.ke.bungomadrinks.web.products.models.ProductCategory;
 import co.ke.bungomadrinks.web.products.repositories.ProductCategoryRepository;
+import co.ke.bungomadrinks.web.products.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductCategoryService {
 
     private final ProductCategoryRepository productCategoryRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductCategoryService(ProductCategoryRepository productCategoryRepository) {
+    public ProductCategoryService(ProductCategoryRepository productCategoryRepository, ProductRepository productRepository) {
         this.productCategoryRepository = productCategoryRepository;
+        this.productRepository = productRepository;
     }
 
 
@@ -45,5 +50,17 @@ public class ProductCategoryService {
 
     public void deleteProductCategory(Long id) {
         productCategoryRepository.deleteById(id);
+    }
+
+    public List<Product> getAllProductsByCategoryName(String name) {
+        List<ProductCategory> productCategories = productCategoryRepository.findAll();
+        List<Product> products = new ArrayList<>();
+        for (ProductCategory productCategory : productCategories) {
+            if (productCategory.getCategoryName().equalsIgnoreCase(name)) {
+                Product prod = productRepository.getProduct(productCategory.getProductId());
+                products.add(prod);
+            }
+        }
+        return products;
     }
 }

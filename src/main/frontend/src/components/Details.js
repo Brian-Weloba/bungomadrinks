@@ -6,7 +6,6 @@ import {
     Card,
     CardContent,
     CardMedia,
-    Container,
     FormControl,
     FormControlLabel,
     FormLabel,
@@ -45,27 +44,27 @@ function Details() {
 
         axios.get(prodOptionsUrl)
             .then(res => {
-                console.log("productOptions Res: ", res.data);
+                // console.log("productOptions Res: ", res.data);
                 setProductOptions(res.data);
-                console.log("product ip:", product);
+                // console.log("product ip:", product);
             });
 
         axios.get(url).then(response => {
             // console.log("product res: ", response.data);
             setProduct(response.data);
             const prod = response.data;
-            console.log("response.data: ", response.data);
-            console.log("product == ", prod);
+            // console.log("response.data: ", response.data);
+            // console.log("product == ", prod);
             const defaultOptionObject = prod.productOptions
-            console.log("defaultOptionObject: ", defaultOptionObject);
-            console.log("dOO", typeof defaultOptionObject[0].productOptionId);
+            // console.log("defaultOptionObject: ", defaultOptionObject);
+            // console.log("dOO", typeof defaultOptionObject[0].productOptionId);
             const defOpt = defaultOptionObject.find(option => option.productOptionId === prod.defaultOption);
             setDefaultOption(defOpt);
-            console.log("defaultOption: ", defOpt);
+            // console.log("defaultOption: ", defOpt);
             setPrice(defOpt.productOptionPrice);
             setSelectedOption(defOpt.productOptionId);
-            console.log("price: ", price);
-            console.log("selectedOption: ", selectedOption);
+            // console.log("price: ", price);
+            // console.log("selectedOption: ", selectedOption);
             setSelectedRadioButton(defOpt.productOptionId);
 
         });
@@ -86,9 +85,9 @@ function Details() {
     const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
 
     function handleChange(e) {
-        console.log("e: ", typeof e.target.value);
+        // console.log("e: ", typeof e.target.value);
         setSelectedRadioButton(e.target.value);
-        console.log("productOptions: ", productOptions);
+        // console.log("productOptions: ", productOptions);
 
         let optionPrice = productOptions.find(option => option.productOptionId === Number(e.target.value)).productOptionPrice;
         setPrice(optionPrice);
@@ -113,21 +112,42 @@ function Details() {
         });
 
     }
+    const bg = process.env.PUBLIC_URL + '/rainbow-vortex.svg';
 
     return (
-        <Container>
-            <Card variant={'outlined'} sx={{
-                margin: "10px",
-                width: "max-content",
-                borderRadius: "10px",
-                padding: "5px",
-                backgroundColor: "#ffffff",
+        <Box
+            style={{
+                backgroundImage: `url(${bg})`,
+                backgroundSize: 'cover',
+                backgroundAttachment: 'scroll',
+                justifyContent: 'center',
                 display: 'flex',
-            }}>
-                <CardMedia sx={{
+                paddingTop: '50px',
+                paddingBottom: '50px',
+
+            }}
+        >
+            <Card
+                raised
+                sx={{
+                    backgroundColor: '#f4f4f4',
+                    width: "max-content",
                     borderRadius: "10px",
-                    height: '400px', width: '400px'
-                }} image={image}/>
+                    padding: "5px",
+                    backgroundAttachment: '',
+                    backgroundSize: 'cover',
+                    display: 'flex',
+                }}>
+                <CardMedia
+
+                    sx={{
+                        // border: '3px solid #a71e22',
+                        borderRadius: "10px",
+                        height: '400px', width: '400px',
+
+                    }}
+
+                    image={image}/>
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -160,7 +180,7 @@ function Details() {
                 </Box>
             </Card>
             {/*<Reccomended/>*/}
-        </Container>
+        </Box>
     );
 
 }

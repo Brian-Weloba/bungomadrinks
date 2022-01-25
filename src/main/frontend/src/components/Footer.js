@@ -26,17 +26,22 @@ const Copyright = () => {
     return (
         <BottomNavigation
             style={{
-                alignText: 'center',
                 backgroundColor: '#211f2a',
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
+                justifyItems: 'center',
                 padding: '10px',
                 height: 'max-content',
-                color: '#675b4f',
-            }}>
-            <Typography variant={'p'}
-            >
+                color: '#f4f4f4',
+                alignItems: 'center',
+            }}
+        >
+            <Typography variant="p">
                 © 2022 Berny'z Liquor Store All Rights Reserved.
+            </Typography>
+            <Typography variant="p">
+                Developed By: Brian Weloba
             </Typography>
 
         </BottomNavigation>
@@ -58,7 +63,7 @@ const BottomNav = () => {
             }}
         >
             <Box style={box}>
-                <h3>SOCIAL</h3>
+                <Typography variant="h6">SOCIAL</Typography>
                 <Grid container>
                     <Grid item>
                         <List>
@@ -101,7 +106,7 @@ const BottomNav = () => {
             </Box>
             <Divider color={'#675b4f'} orientation="vertical" variant="middle" flexItem/>
             <Box style={box}>
-                <h3>CONTACT US</h3>
+                <Typography variant="h6">CONTACT US</Typography>
                 <Grid container>
                     <Grid item>
                         <List>
@@ -123,7 +128,7 @@ const BottomNav = () => {
             </Box>
             <Divider color={'#675b4f'} orientation="vertical" variant="middle" flexItem/>
             <Box style={box}>
-                <h3>INFORMATION</h3>
+                <Typography variant="h6">INFORMATION</Typography>
                 <Grid container>
                     <Grid item>
                         <List>
