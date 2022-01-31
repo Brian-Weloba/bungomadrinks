@@ -1,13 +1,30 @@
 import {AppBar, Box, CssBaseline, InputBase, Toolbar} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
+import '../App.css';
 import {styled} from "@mui/styles";
 import {Link as RouterLink} from "react-router-dom";
 
 const navbar = {
     backgroundColor: '#211F2A',
+    position: 'static',
+    boxShadow: "rgba(0, 0, 0, 0.3) 1px 3px 10px 3px",
+    animationDuration: '2s',
 
 };
+
+const navbarNull = {
+    height:'0',
+    animationDuration: '2s',
+    display: 'none',
+}
+const navbarScroll = {
+    backgroundColor: '#7661c5',
+    display: 'flex',
+    boxShadow: "rgba(0, 0, 0, 0.3) 1px 3px 10px 3px",
+    justifyContent: 'space-between',
+
+}
 
 
 const categories = {
@@ -68,20 +85,48 @@ function onLinkLeave(e) {
 
 
 const Navbar = () => {
+    const [navBarScroll, setNavBarScroll] = React.useState(false);
+    // const listener = document.addEventListener('scroll', () => {
+    //     if (window.scrollY > 160) {
+    //         setNavBarScroll(true);
+    //     } else {
+    //         setNavBarScroll(false);
+    //     }
+    // });
+
+    const handleScroll = () => {
+        if (window.scrollY > 160) {
+            setNavBarScroll(true);
+        } else {
+            setNavBarScroll(false);
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+
+    const img = {
+        height: '80px',
+    }
+
+    const imgsc = {
+        height: '50px',
+    }
 
     return (
-        <AppBar position="static" style={navbar}>
+        <AppBar>
             <CssBaseline/>
-            <Box style={{
-                boxShadow: "rgba(0, 0, 0, 0.3) 1px 3px 10px 3px",
-            }}>
+            <Box style={!navBarScroll ? navbar : navbarNull} className="Initial-Nav">
                 <Toolbar
                     style={{
-                        paddingTop: '10px', display: 'flex', justifyContent: 'space-between',
+                        paddingTop: '10px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
                     }}
                 >
                     <RouterLink to={"/"}>
-                        <img src={process.env.PUBLIC_URL + '/logo.png'} height={80} alt={"berny's home"}/>
+                        <img src={process.env.PUBLIC_URL + '/logo.png'} style={img}
+                             alt="berny'z logo"/>
                     </RouterLink>
 
                 </Toolbar>
@@ -135,6 +180,83 @@ const Navbar = () => {
                             Cans
                         </RouterLink>
                     </div>
+                    <Search
+                        style={{
+                            right: '10px',
+                        }}
+                    >
+                        <SearchIconWrapper>
+                            <SearchIcon/>
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            placeholder="Search…"
+                            inputProps={{'aria-label': 'search'}}
+                        />
+                    </Search>
+                </Toolbar>
+            </Box>
+            <Box >
+                <Toolbar
+                    style={!navBarScroll ? navbarNull : navbarScroll} className="second-nav"
+                >
+                    <RouterLink to={"/"}>
+                        <img src={process.env.PUBLIC_URL + '/logo.png'} style={imgsc}
+                             alt="berny'z logo"/>
+                    </RouterLink>
+
+                </Toolbar>
+                <Toolbar
+                    style={{
+
+                        paddingTop: '5px', display: 'flex', justifyContent: 'space-between',
+                    }}
+                >
+                    <div style={categories}>
+                        <RouterLink to={"category/whisky"} underline={'none'} onMouseEnter={onLinkEnter}
+                                    onMouseLeave={onLinkLeave}
+                                    style={navElement}>
+                            Whisky
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/gin"
+                                    style={navElement}
+                        >
+                            Gin
+                        </RouterLink>
+                        <RouterLink
+                            underline={'hover'}
+                            onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to={"category/rum"}
+                            style={navElement}
+                        >
+                            Rum
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/brandy"
+                                    style={navElement}
+                        >
+                            Brandy
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/vodka"
+                                    style={navElement}
+                        >
+                            Vodka
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/wines"
+                                    style={navElement}
+                        >
+                            Wines
+                        </RouterLink>
+                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
+                                    to="category/cans"
+                                    style={navElement}
+                        >
+                            Cans
+                        </RouterLink>
+                    </div>
+                </Toolbar>
+                <Toolbar>
                     <Search
                         style={{
                             right: '10px',

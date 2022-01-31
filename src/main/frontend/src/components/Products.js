@@ -26,7 +26,7 @@ const readMore = {
 
 
 const card = {
-    borderRadius: '0px',
+    borderRadius: '10px',
     margin: '10px',
     // boxShadow: '0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)',
     border: '1px solid #ebebea',
@@ -235,6 +235,7 @@ const Home = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     paddingTop: '50px',
+                    marginTop: '110px',
                 }}
             >
                 <Grid
