@@ -104,4 +104,15 @@ public class ProductRepository {
         }
         return productCategoriesToReturn;
     }
+
+    public List<Product> findAllByProductCategory(String name) {
+        List<Product> products = entityManager.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+        List<Product> productsToReturn = new ArrayList<>();
+        for (Product product : products) {
+            if(product.getProductType().equalsIgnoreCase(name)) {
+                productsToReturn.add(product);
+            }
+        }
+        return productsToReturn;
+    }
 }

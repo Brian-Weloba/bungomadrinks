@@ -26,8 +26,9 @@ const readMore = {
 
 
 const card = {
-    borderRadius: '0px',
-    boxShadow: '0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)',
+    borderRadius: '10px',
+    margin: '10px',
+    // boxShadow: '0px 0px 0px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 0px 0px rgba(0,0,0,0.12)',
     border: '1px solid #ebebea',
     backgroundColor: '#ffffff',
     display: 'flex',
@@ -77,7 +78,7 @@ const cardHeader = {
     height: '70px',
 }
 
-function  GetProducts(name) {
+function GetProducts(name) {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = () => {
@@ -156,14 +157,15 @@ const ProductsByCategory = () => {
                     <Card sx={{width: 250, height: 'max-content'}}
                           variant="outlined"
                           style={card}>
-                        <CardMedia  onMouseEnter={onCardEnter}
-                                    onMouseLeave={onCardExit}
-                                    className="media"
-                                    width="100"
-                                    style={carddiv}
+                        <CardMedia onMouseEnter={onCardEnter}
+                                   onMouseLeave={onCardExit}
+                                   className="media"
+                                   width="100"
+                                   style={carddiv}
                         >
                             <img style={img} src={image} alt="product"/>
-                            <IconButton onClick={() => handleOpen(image, product.productId)} className='button' style={icon}>
+                            <IconButton onClick={() => handleOpen(image, product.productId)} className='button'
+                                        style={icon}>
                                 <Visibility
                                     fontSize="large"
                                 />
@@ -219,16 +221,20 @@ const ProductsByCategory = () => {
         }
 
         return (
-            <Box
-                style={{
-                    backgroundColor: '#fafafa',
-                    width: 'fit-content',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingTop: '50px',
-                }}
+            <Box className={'products'}
+                 style={{
+                     // backgroundColor: '#fafafa',
+                     width: '100vw',
+                     paddingLeft: '20px',
+                     paddingRight: '20px',
+                     // justifyContent: 'center',
+                     textAlign: 'center',
+                     display: 'inline-block',
+                     alignItems: 'center',
+                     paddingTop: '50px',
+                     marginTop: '100px',
+                     minHeight: '70vh',
+                 }}
             >
                 <Grid
                     style={{
@@ -239,8 +245,8 @@ const ProductsByCategory = () => {
                         alignItems: 'flex-start',
                         alignContent: 'flex-start',
                         alignSelf: 'flex-start',
-                        marginTop: '20px',
-                        marginBottom: '20px',
+                        paddingTop: '20px',
+                        paddingBottom: '50px',
                     }}
                     container
                 >
@@ -257,7 +263,7 @@ const ProductsByCategory = () => {
                         justifyContent: 'end',
                     }}>
                         <IconButton onClick={handleClose}>
-                            <Close style={{}} fontSize={'large'} />
+                            <Close style={{}} fontSize={'large'}/>
                         </IconButton>
                     </DialogTitle>
                     <DialogContent

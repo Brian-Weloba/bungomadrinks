@@ -53,14 +53,18 @@ public class ProductCategoryService {
     }
 
     public List<Product> getAllProductsByCategoryName(String name) {
-        List<ProductCategory> productCategories = productCategoryRepository.findAll();
-        List<Product> products = new ArrayList<>();
-        for (ProductCategory productCategory : productCategories) {
-            if (productCategory.getCategoryName().equalsIgnoreCase(name)) {
-                Product prod = productRepository.getProduct(productCategory.getProductId());
-                products.add(prod);
-            }
-        }
+//        List<ProductCategory> productCategories = productCategoryRepository.findAll();
+//        List<Product> products = new ArrayList<>();
+//        for (ProductCategory productCategory : productCategories) {
+//            if (productCategory.getCategoryName().equalsIgnoreCase(name)) {
+//                Product prod = productRepository.getProduct(productCategory.getProductId());
+//                products.add(prod);
+//            }
+//        }
+
+        List<Product> products = productRepository.findAllByProductCategory(name);
+
+
         return products;
     }
 }

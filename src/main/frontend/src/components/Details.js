@@ -13,6 +13,7 @@ import {
     RadioGroup,
     Typography
 } from "@mui/material";
+import './Products.css';
 
 
 function Details() {
@@ -115,15 +116,17 @@ function Details() {
     const bg = process.env.PUBLIC_URL + '/rainbow-vortex.svg';
 
     return (
-        <Box
+        <Box className={'products'}
             style={{
-                backgroundImage: `url(${bg})`,
-                backgroundSize: 'cover',
-                backgroundAttachment: 'scroll',
+                // backgroundImage: `url(${bg})`,
+                // backgroundSize: 'cover',
+                // backgroundAttachment: 'scroll',
                 justifyContent: 'center',
                 display: 'flex',
                 paddingTop: '50px',
                 paddingBottom: '50px',
+                marginTop: '100px',
+                minHeight: '70vh',
 
             }}
         >

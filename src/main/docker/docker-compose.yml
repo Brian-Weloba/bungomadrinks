@@ -1,0 +1,22 @@
+version: latest
+
+services:
+  app:
+    image: 'bungomadrinks:latest'
+    build:
+      context: .
+      container_name: bungomadrinks
+      depends_on:
+        - db
+      environment:
+        - SPRING_DATAsource_URL=jdbc:postgresql://db:5432/bungomadrinks
+        - SPRING_DATASOURCE_USERNAME=compose-postgres
+        - SPRING_DATASOURCE_PASSWORD=compose-postgres
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+        db:
+          image: 'postgres:13.1-alpine'
+            container_name: db
+            environment:
+              - POSTGRES_USER=compose-postgres
+              - POSTGRES_PASSWORD=compose-postgres

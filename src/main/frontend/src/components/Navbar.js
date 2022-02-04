@@ -1,27 +1,30 @@
-import {AppBar, Box, CssBaseline, InputBase, Toolbar} from "@mui/material";
+import {AppBar, Box, CssBaseline, IconButton, InputBase, Menu, MenuItem, Toolbar} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 import '../App.css';
 import {styled} from "@mui/styles";
 import {Link as RouterLink} from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const navbar = {
     backgroundColor: '#211F2A',
-    position: 'static',
-    boxShadow: "rgba(0, 0, 0, 0.3) 1px 3px 10px 3px",
-    animationDuration: '2s',
-
+    // position: 'sticky',
+    // top: 0,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
 };
 
 const navbarNull = {
-    height:'0',
+    height: '0',
     animationDuration: '2s',
     display: 'none',
 }
+
 const navbarScroll = {
-    backgroundColor: '#7661c5',
+    backgroundColor: '#211F2A',
     display: 'flex',
-    boxShadow: "rgba(0, 0, 0, 0.3) 1px 3px 10px 3px",
     justifyContent: 'space-between',
 
 }
@@ -37,6 +40,16 @@ const navElement = {
     fontSize: '12pt',
     fontWeight: 'bold',
     paddingRight: '10px',
+    cursor: 'pointer',
+    textDecoration: 'none',
+};
+
+const menuElement = {
+    color: '#211F2A',
+    fontSize: '12pt',
+    fontWeight: 'bold',
+    paddingRight: '10px',
+    paddingLeft: '10px',
     cursor: 'pointer',
     textDecoration: 'none',
 };
@@ -83,8 +96,13 @@ function onLinkLeave(e) {
     e.target.style.color = '#ffffff';
 }
 
+function onMenuLinkLeave(e) {
+    e.target.style.color = '#211F2A';
+}
+
 
 const Navbar = () => {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [navBarScroll, setNavBarScroll] = React.useState(false);
     // const listener = document.addEventListener('scroll', () => {
     //     if (window.scrollY > 160) {
@@ -113,166 +131,254 @@ const Navbar = () => {
         height: '50px',
     }
 
+    const handleOpenNavMenu = (e) => {
+        setAnchorElNav(e.currentTarget);
+    }
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    }
+
     return (
-        <AppBar>
-            <CssBaseline/>
-            <Box style={!navBarScroll ? navbar : navbarNull} className="Initial-Nav">
+        <Box>
+            <AppBar>
+                <CssBaseline/>
                 <Toolbar
-                    style={{
-                        paddingTop: '10px',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                    }}
+                    maxWidth="xl"
+                    style={ navbar } className="Initial-Nav"
                 >
-                    <RouterLink to={"/"}>
-                        <img src={process.env.PUBLIC_URL + '/logo.png'} style={img}
-                             alt="berny'z logo"/>
-                    </RouterLink>
-
-                </Toolbar>
-                <Toolbar
-                    style={{
-
-                        paddingTop: '5px', display: 'flex', justifyContent: 'space-between',
-                    }}
-                >
-                    <div style={categories}>
-                        <RouterLink to={"category/whisky"} underline={'none'} onMouseEnter={onLinkEnter}
-                                    onMouseLeave={onLinkLeave}
-                                    style={navElement}>
-                            Whisky
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/gin"
-                                    style={navElement}
-                        >
-                            Gin
-                        </RouterLink>
-                        <RouterLink
-                            underline={'hover'}
-                            onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to={"category/rum"}
-                            style={navElement}
-                        >
-                            Rum
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/brandy"
-                                    style={navElement}
-                        >
-                            Brandy
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/vodka"
-                                    style={navElement}
-                        >
-                            Vodka
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/wines"
-                                    style={navElement}
-                        >
-                            Wines
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/cans"
-                                    style={navElement}
-                        >
-                            Cans
-                        </RouterLink>
-                    </div>
-                    <Search
+                    <Box
                         style={{
-                            right: '10px',
-                        }}
-                    >
-                        <SearchIconWrapper>
-                            <SearchIcon/>
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{'aria-label': 'search'}}
-                        />
-                    </Search>
-                </Toolbar>
-            </Box>
-            <Box >
-                <Toolbar
-                    style={!navBarScroll ? navbarNull : navbarScroll} className="second-nav"
-                >
-                    <RouterLink to={"/"}>
-                        <img src={process.env.PUBLIC_URL + '/logo.png'} style={imgsc}
-                             alt="berny'z logo"/>
-                    </RouterLink>
+                            width: '100vw',
+                            paddingTop: '10px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            paddingBottom: '10px',
+                        }}>
+                        <Box sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}>
+                            <RouterLink
+                                noWrap
+                                component={'div'}
 
-                </Toolbar>
-                <Toolbar
-                    style={{
+                                to={"/"}>
+                                <img src={process.env.PUBLIC_URL + '/logo.png'} style={!navBarScroll ? img: imgsc}
+                                     alt="berny'z logo"/>
+                            </RouterLink>
+                        </Box>
 
-                        paddingTop: '5px', display: 'flex', justifyContent: 'space-between',
-                    }}
-                >
-                    <div style={categories}>
-                        <RouterLink to={"category/whisky"} underline={'none'} onMouseEnter={onLinkEnter}
-                                    onMouseLeave={onLinkLeave}
-                                    style={navElement}>
-                            Whisky
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/gin"
+                        <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
+                        >
+                            <IconButton
+                                size='large'
+                                aria-label="open drawer"
+                                aria-controls="nav-menu"
+                                aria-haspopup="true"
+                                onClick={handleOpenNavMenu}
+                                color="inherit"
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+                            <Menu
+                                maxWidth="80vw"
+                                id="menu-appbar"
+                                anchorEl={anchorElNav}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                open={Boolean(anchorElNav)}
+                                onClose={handleCloseNavMenu}
+                                sx={{
+                                    display: {xs: 'block', md: 'none'},
+                                }}
+                            >
+                                <MenuItem>
+                                    <Box>
+                                        <Search
+                                            style={{
+                                                right: '10px',
+                                            }}
+                                        >
+                                            <SearchIconWrapper>
+                                                <SearchIcon/>
+                                            </SearchIconWrapper>
+                                            <StyledInputBase
+                                                placeholder="Search…"
+                                                inputProps={{'aria-label': 'search'}}
+                                            />
+                                        </Search>
+                                    </Box>
+                                </MenuItem>
+
+                                <MenuItem>
+                                    <RouterLink to={"category/whisky"} underline={'none'}
+                                                onMouseEnter={onLinkEnter}
+                                                onMouseLeave={onMenuLinkLeave}
+                                                onClick={handleCloseNavMenu}
+                                                style={menuElement}
+                                                textAlign={'center'}
+                                    >
+                                        Whisky
+                                    </RouterLink>
+                                </MenuItem>
+                                <MenuItem>
+                                    <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                                onMouseLeave={onMenuLinkLeave}
+                                                to="category/gin"
+                                                onClick={handleCloseNavMenu}
+                                                style={menuElement}
+                                    >
+                                        Gin
+                                    </RouterLink>
+                                </MenuItem>
+                                <MenuItem>
+                                    <RouterLink
+                                        underline={'hover'}
+                                        onMouseEnter={onLinkEnter} onMouseLeave={onMenuLinkLeave} to={"category/rum"}
+                                        onClick={handleCloseNavMenu}
+                                        style={menuElement}
+                                    >
+                                        Rum
+                                    </RouterLink>
+                                </MenuItem>
+                                <MenuItem>
+                                    <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                                onMouseLeave={onMenuLinkLeave}
+                                                onClick={handleCloseNavMenu}
+                                                to="category/brandy"
+                                                style={menuElement}
+                                    >
+                                        Brandy
+                                    </RouterLink>
+                                </MenuItem>
+                                <MenuItem>
+                                    <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                                onMouseLeave={onMenuLinkLeave}
+                                                onClick={handleCloseNavMenu}
+                                                to="category/vodka"
+                                                style={menuElement}
+                                    >
+                                        Vodka
+                                    </RouterLink>
+                                </MenuItem>
+                                <MenuItem>
+                                    <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                                onMouseLeave={onMenuLinkLeave}
+                                                to="category/wine"
+                                                onClick={handleCloseNavMenu}
+                                                style={menuElement}
+                                    >
+                                        Wines
+                                    </RouterLink>
+                                </MenuItem>
+                                <MenuItem>
+                                    <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                                onMouseLeave={onMenuLinkLeave}
+                                                to="category/canned"
+                                                onClick={handleCloseNavMenu}
+                                                style={menuElement}
+                                    >
+                                        Cans
+                                    </RouterLink>
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                        <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
+                        >
+                            <RouterLink
+                                noWrap
+                                component={'div'}
+                                to={"/"}>
+                                <img src={process.env.PUBLIC_URL + '/logo.png'} style={!navBarScroll ? img: imgsc}
+                                     alt="berny'z logo"/>
+                            </RouterLink>
+                        </Box>
+                        <Box
+                            style={{
+
+                                paddingTop: '5px', justifyContent: 'space-between',
+                            }}
+                            sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
+                        >
+                            <div style={categories}>
+                                <RouterLink to={"category/whisky"} underline={'none'} onMouseEnter={onLinkEnter}
+                                            onMouseLeave={onLinkLeave}
+                                            style={navElement}>
+                                    Whisky
+                                </RouterLink>
+                                <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                            onMouseLeave={onLinkLeave}
+                                            to="category/gin"
+                                            style={navElement}
+                                >
+                                    Gin
+                                </RouterLink>
+                                <RouterLink
+                                    underline={'hover'}
+                                    onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to={"category/rum"}
                                     style={navElement}
+                                >
+                                    Rum
+                                </RouterLink>
+                                <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                            onMouseLeave={onLinkLeave}
+                                            to="category/brandy"
+                                            style={navElement}
+                                >
+                                    Brandy
+                                </RouterLink>
+                                <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                            onMouseLeave={onLinkLeave}
+                                            to="category/vodka"
+                                            style={navElement}
+                                >
+                                    Vodka
+                                </RouterLink>
+                                <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                            onMouseLeave={onLinkLeave}
+                                            to="category/wine"
+                                            style={navElement}
+                                >
+                                    Wines
+                                </RouterLink>
+                                <RouterLink underline={'hover'} onMouseEnter={onLinkEnter}
+                                            onMouseLeave={onLinkLeave}
+                                            to="category/canned"
+                                            style={navElement}
+                                >
+                                    Cans
+                                </RouterLink>
+                            </div>
+                        </Box>
+                        <Box
+                            sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
                         >
-                            Gin
-                        </RouterLink>
-                        <RouterLink
-                            underline={'hover'}
-                            onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} to={"category/rum"}
-                            style={navElement}
-                        >
-                            Rum
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/brandy"
-                                    style={navElement}
-                        >
-                            Brandy
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/vodka"
-                                    style={navElement}
-                        >
-                            Vodka
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/wines"
-                                    style={navElement}
-                        >
-                            Wines
-                        </RouterLink>
-                        <RouterLink underline={'hover'} onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave}
-                                    to="category/cans"
-                                    style={navElement}
-                        >
-                            Cans
-                        </RouterLink>
-                    </div>
+                            <Search
+                                style={{
+                                    right: '10px',
+                                }}
+                            >
+                                <SearchIconWrapper>
+                                    <SearchIcon/>
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Search…"
+                                    inputProps={{'aria-label': 'search'}}
+                                />
+                            </Search>
+                        </Box>
+                    </Box>
                 </Toolbar>
-                <Toolbar>
-                    <Search
-                        style={{
-                            right: '10px',
-                        }}
-                    >
-                        <SearchIconWrapper>
-                            <SearchIcon/>
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{'aria-label': 'search'}}
-                        />
-                    </Search>
-                </Toolbar>
-            </Box>
-        </AppBar>);
+            </AppBar>
+</Box>
+)
+    ;
 }
 
 export default Navbar;

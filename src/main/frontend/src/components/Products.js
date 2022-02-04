@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {
-    Box,
+    Box, Breadcrumbs,
     Button,
     Card,
     CardContent,
@@ -11,12 +11,23 @@ import {
     DialogContent,
     DialogTitle,
     Grid,
-    IconButton,
+    IconButton, Pagination,
     Typography
 } from "@mui/material";
 import {Close, ReadMore, Visibility} from "@mui/icons-material";
 import {Link, useParams} from "react-router-dom";
 import DialogActions from '@mui/material/DialogActions';
+import './Products.css';
+import {HomeIcon,WhatshotIcon} from "@mui/icons-material";
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+import {
+    DataGrid,
+    gridPageCountSelector,
+    gridPageSelector,
+    useGridApiContext,
+    useGridSelector,
+} from '@mui/x-data-grid';
 
 const readMore = {
     backgroundColor: '#a71e22',
@@ -62,6 +73,7 @@ const carddiv = {
 
 const img = {
     width: 250,
+    height: 250,
 }
 
 const icon = {
@@ -214,28 +226,54 @@ const Home = () => {
         });
     }
 
+    // function CustomPagination() {
+    //     const apiRef = useGridApiContext();
+    //     const page = useGridSelector(apiRef, gridPageSelector);
+    //     const pageCount = useGridSelector(apiRef, gridPageCountSelector);
+    //
+    //     return (
+    //         <Pagination
+    //             color="primary"
+    //             count={pageCount}
+    //             page={page + 1}
+    //             onChange={(event, value) => apiRef.current.setPage(value - 1)}
+    //         />
+    //     );
+    // }
+
     const Products = () => {
 
         function handleClose() {
             setOpen(false);
         }
 
+        function handleClick(event) {
+            event.preventDefault();
+            console.info('You clicked a breadcrumb.');
+        }
+
         const bg = process.env.PUBLIC_URL + '/rainbow-vortex.svg';
 
         return (
-            <Box
+            <Box className={"products"}
                 style={{
-                    backgroundColor: '#ff9d00',
-                    backgroundImage: `url(${bg})`,
-                    backgroundAttachment: 'scroll',
-                    backgroundSize: 'cover',
-                    width: 'fit-content',
+                    // backgroundColor: '#ff9d00',
+                    // backgroundImage: `url(${bg})`,
+                    // background-image: linear-gradient(to bottom, #211f2a, #4b4a53, #7a7980, #adacb0, #e2e2e2);
+                    // backgroundImage: "linear-gradient(to bottom, #211f2a, #4b4a53, #7a7980, #adacb0, #e2e2e2)",
+                    // backgroundAttachment: 'scroll',
+                    // backgroundSize: 'cover',
+                    width: '100vw',
                     paddingLeft: '20px',
                     paddingRight: '20px',
-                    justifyContent: 'center',
+                    // justifyContent: 'center',
+                    textAlign: 'center',
+                    display: 'inline-block',
                     alignItems: 'center',
                     paddingTop: '50px',
-                    marginTop: '110px',
+                    minHeight:'70vh',
+
+                    marginTop: '100px',
                 }}
             >
                 <Grid
