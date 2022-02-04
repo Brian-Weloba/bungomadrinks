@@ -67,7 +67,7 @@
 //     const [products, setProducts] = useState([]);
 //
 //     const fetchProducts = () => {
-//         axios.get("http://localhost:8081/api/products").then(response => {
+//         axios.get("209.97.144.225/api/products").then(response => {
 //             console.log(response);
 //             setProducts(response.data);
 //         });
