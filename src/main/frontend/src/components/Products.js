@@ -95,7 +95,7 @@ export const GetProducts = () => {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = () => {
-        axios.get("/209.97.144.225:8081/api/products").then(response => {
+        axios.get("http://209.97.144.225:8081/api/products").then(response => {
             // console.log(response);
             setProducts(response.data);
         });
