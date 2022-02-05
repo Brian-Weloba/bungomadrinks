@@ -82,7 +82,7 @@ function GetProducts(name) {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = () => {
-        axios.get(`209.97.144.225/api/products/categories/get?name=${name}`).then(response => {
+        axios.get(`209.97.144.225:8081/api/products/categories/get?name=${name}`).then(response => {
             // console.log(response);
             setProducts(response.data);
         });
@@ -121,7 +121,7 @@ const ProductsByCategory = () => {
         }
 
         return GetProducts(name).map((product, index) => {
-            const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
+            const image = process.env.PUBLIC_URL+"/assets/" + product.productImage;
             const defaultOption = product.productOptions;
 
             // const prodOptions = defaultOption.map(defaultOption);

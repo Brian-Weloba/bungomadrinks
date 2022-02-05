@@ -20,8 +20,8 @@ function Details() {
 
 
     let {id} = useParams()
-    let url = "209.97.144.225/api/products/" + id;
-    let prodOptionsUrl = "209.97.144.225/api/products/" + id + "/options";
+    let url = "209.97.144.225:8081/api/products/" + id;
+    let prodOptionsUrl = "209.97.144.225:8081/api/products/" + id + "/options";
 
     // let defaultOption = {};
     // let price = 0;
@@ -83,7 +83,7 @@ function Details() {
 // console.log("prodOptions: ", productOptions);
 
 
-    const image = "https://bungomadrinks.s3.af-south-1.amazonaws.com/images/scaled-images/" + product.productImage;
+    const image = process.env.PUBLIC_URL+"/assets/" + product.productImage;
 
     function handleChange(e) {
         // console.log("e: ", typeof e.target.value);
