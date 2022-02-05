@@ -20,8 +20,8 @@ function Details() {
 
 
     let {id} = useParams()
-    let url = "209.97.144.225:8081/api/products/" + id;
-    let prodOptionsUrl = "209.97.144.225:8081/api/products/" + id + "/options";
+    let url = "/209.97.144.225:8081/api/products/" + id;
+    let prodOptionsUrl = "/209.97.144.225:8081/api/products/" + id + "/options";
 
     // let defaultOption = {};
     // let price = 0;
