@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {
-    Box, Breadcrumbs,
+    Box,
     Button,
     Card,
     CardContent,
@@ -11,23 +11,13 @@ import {
     DialogContent,
     DialogTitle,
     Grid,
-    IconButton, Pagination,
+    IconButton,
     Typography
 } from "@mui/material";
 import {Close, ReadMore, Visibility} from "@mui/icons-material";
 import {Link, useParams} from "react-router-dom";
 import DialogActions from '@mui/material/DialogActions';
 import './Products.css';
-import {HomeIcon,WhatshotIcon} from "@mui/icons-material";
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-import {
-    DataGrid,
-    gridPageCountSelector,
-    gridPageSelector,
-    useGridApiContext,
-    useGridSelector,
-} from '@mui/x-data-grid';
 
 const readMore = {
     backgroundColor: '#a71e22',
@@ -95,7 +85,7 @@ export const GetProducts = () => {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = () => {
-        axios.get("http://209.97.144.225:8081/api/products").then(response => {
+        axios.get("http://209.97.144.225/api/products").then(response => {
             // console.log(response);
             setProducts(response.data);
         });
@@ -123,16 +113,8 @@ const Home = () => {
         }
 
 
-        const FullscreenImage = (image) => {
-            return (
-                <Box>
-                    <img src={image} alt=""/>
-                </Box>
-            )
-        }
-
         return GetProducts(name).map((product, index) => {
-            const image = process.env.PUBLIC_URL+"/assets/" + product.productImage;
+            const image = process.env.PUBLIC_URL + "/assets/" + product.productImage;
             const defaultOption = product.productOptions;
 
             // const prodOptions = defaultOption.map(defaultOption);
@@ -166,7 +148,7 @@ const Home = () => {
             return (
                 <Grid item key={index}>
                     <Card sx={{width: 250, height: 'max-content'}}
-                          // variant="outlined"
+                        // variant="outlined"
                           raised={true}
                           style={card}>
                         <CardMedia onMouseEnter={onCardEnter}
@@ -252,29 +234,27 @@ const Home = () => {
             console.info('You clicked a breadcrumb.');
         }
 
-        const bg = process.env.PUBLIC_URL + '/rainbow-vortex.svg';
-
         return (
             <Box className={"products"}
-                style={{
-                    // backgroundColor: '#ff9d00',
-                    // backgroundImage: `url(${bg})`,
-                    // background-image: linear-gradient(to bottom, #211f2a, #4b4a53, #7a7980, #adacb0, #e2e2e2);
-                    // backgroundImage: "linear-gradient(to bottom, #211f2a, #4b4a53, #7a7980, #adacb0, #e2e2e2)",
-                    // backgroundAttachment: 'scroll',
-                    // backgroundSize: 'cover',
-                    width: '100vw',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
-                    // justifyContent: 'center',
-                    textAlign: 'center',
-                    display: 'inline-block',
-                    alignItems: 'center',
-                    paddingTop: '50px',
-                    minHeight:'70vh',
+                 style={{
+                     // backgroundColor: '#ff9d00',
+                     // backgroundImage: `url(${bg})`,
+                     // background-image: linear-gradient(to bottom, #211f2a, #4b4a53, #7a7980, #adacb0, #e2e2e2);
+                     // backgroundImage: "linear-gradient(to bottom, #211f2a, #4b4a53, #7a7980, #adacb0, #e2e2e2)",
+                     // backgroundAttachment: 'scroll',
+                     // backgroundSize: 'cover',
+                     width: '100vw',
+                     paddingLeft: '20px',
+                     paddingRight: '20px',
+                     // justifyContent: 'center',
+                     textAlign: 'center',
+                     display: 'inline-block',
+                     alignItems: 'center',
+                     paddingTop: '50px',
+                     minHeight: '70vh',
 
-                    marginTop: '100px',
-                }}
+                     marginTop: '100px',
+                 }}
             >
                 <Grid
                     style={{
