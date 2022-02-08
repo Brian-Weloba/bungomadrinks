@@ -22,6 +22,9 @@ import "./Products.css";
 const readMore = {
   backgroundColor: "#a71e22",
   borderRadius: "0%",
+  width: "100%",
+  margin: "0px",
+  fontSize: "1rem",
   textDecoration: "none",
 };
 
@@ -34,6 +37,9 @@ const card = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
+  maxWidth: "250px",
+  minWidth: "200px",
+
 };
 
 function onCardEnter(e) {
@@ -52,7 +58,8 @@ function onCardExit(e) {
 }
 
 const carddiv = {
-  width: 250,
+  minWidth: 100,
+  maxWidth: 250,
   overflow: "hidden",
   justifyContent: "center",
   alignItems: "center",
@@ -60,8 +67,11 @@ const carddiv = {
 };
 
 const img = {
-  width: 250,
-  height: 250,
+  width: "100%",
+  minWidth: 100,
+  minHeight: 100,
+  maxHeight: 250,
+  maxWidth: 250,
 };
 
 const icon = {
@@ -70,11 +80,6 @@ const icon = {
   position: "absolute",
   cursor: "pointer",
   display: "none",
-};
-
-const cardHeader = {
-  color: "#211f2a",
-  height: "70px",
 };
 
 export const GetProducts = () => {
@@ -144,7 +149,8 @@ const Home = () => {
       return (
         <Grid item key={index}>
           <Card
-            sx={{ width: 250, height: "max-content" }}
+          className="cards"
+            // sx={{width: 250, minWidth: 100, maxWidth: 250, height: "max-content" }}
             // variant="outlined"
             raised={true}
             style={card}
@@ -153,7 +159,7 @@ const Home = () => {
               onMouseEnter={onCardEnter}
               onMouseLeave={onCardExit}
               className="media"
-              width="100"
+              maxWidth="100"
               style={carddiv}
             >
               <img style={img} src={image} alt="product" />
@@ -174,13 +180,20 @@ const Home = () => {
               }}
               disableTypography={true}
               title={
-                <Typography variant="h6" style={cardHeader}>
+                <h6  className="cardHeader">
                   {" "}
                   {product.productName} - {optionVolume}{" "}
-                </Typography>
+                </h6>
               }
               subheader={
-                <Typography variant="subtitle1"> KES {optionPrice} </Typography>
+                <h6     style={
+                    {
+                        fontSize: "20px",
+                        marginTop: "0px",
+                        marginBottom: "0px",
+                        color: "#a71e22",
+                    }
+                }> KES {optionPrice} </h6>
               }
             />{" "}
             <CardContent style={{ textAlign: "center" }}>
@@ -237,8 +250,8 @@ const Home = () => {
           // backgroundAttachment: 'scroll',
           // backgroundSize: 'cover',
           width: "100vw",
-          paddingLeft: "20px",
-          paddingRight: "20px",
+        //   paddingLeft: "20px",
+        //   paddingRight: "20px",
           // justifyContent: 'center',
           textAlign: "center",
           display: "inline-block",
