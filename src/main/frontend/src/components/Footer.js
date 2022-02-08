@@ -4,6 +4,7 @@ import {
   Divider,
   Grid,
   List,
+  ListItem,
   ListItemButton,
   ListItemText,
   Typography,
@@ -13,7 +14,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function onLinkEnter(e) {
-//   e.target.style.color = "#ec702a";
+  //   e.target.style.color = "#ec702a";
   e.target.style.color = "#ffffff";
   e.target.style.animationDuration = "5s";
 }
@@ -28,6 +29,13 @@ const box = {
   display: "flex",
   flexDirection: "column",
 };
+
+const box2 = {
+    paddingLeft: "16px",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+  };
 
 const Copyright = () => {
   return (
@@ -162,7 +170,26 @@ const BottomNav = () => {
             <Grid container>
               <Grid item>
                 <List>
-                  <ListItemButton
+                  <ListItem>
+                    <Typography variant="p">Payment: On Delivery</Typography>
+                  </ListItem>
+                  <ListItem>
+                    <Typography variant="p">
+                      Delivery Time: 90 MINUTES MON-SUN 8:30AM – 6:15PM
+                    </Typography>
+                  </ListItem>
+                  <ListItem>
+                    <Typography variant="p">Call: +254711346421</Typography>
+                  </ListItem>
+                  <ListItem>
+                    <Typography variant="p">Buy Goods:9378773</Typography>
+                  </ListItem>
+                  {/* <ListItem>
+                    <Typography variant="p">
+                      Currently Delivering To:
+                    </Typography>
+                  </ListItem> */}
+                  {/* <ListItemButton
                     disabled
                     onMouseEnter={onLinkEnter}
                     onMouseLeave={onLinkLeave}
@@ -182,7 +209,7 @@ const BottomNav = () => {
                     onMouseLeave={onLinkLeave}
                   >
                     <ListItemText primary="Terms & Conditions" />
-                  </ListItemButton>
+                  </ListItemButton> */}
                 </List>
               </Grid>
             </Grid>
@@ -208,7 +235,7 @@ const BottomNav = () => {
             margin: "0",
           }}
         >
-          <Box style={box}>
+          <Box style={box2}>
             <Typography variant="h6">SOCIAL</Typography>
             <Grid container>
               <Grid item>
@@ -267,7 +294,7 @@ const BottomNav = () => {
             variant="middle"
             flexItem
           />
-          <Box style={box}>
+          <Box style={box2}>
             <Typography variant="h6">CONTACT US</Typography>
             <Grid container>
               <Grid item>
@@ -301,12 +328,33 @@ const BottomNav = () => {
             variant="middle"
             flexItem
           />
-          <Box style={box}>
+          <Box style={box2}>
             <Typography variant="h6">INFORMATION</Typography>
             <Grid container>
               <Grid item>
                 <List>
-                  <ListItemButton
+                <ListItem>
+                    <Typography variant="p">Payment: On Delivery</Typography>
+                  </ListItem>
+                  <ListItem>
+                    <Typography variant="p">
+                      Delivery Time: 90 MINUTES MON-SUN 8:30AM – 6:15PM
+                    </Typography>
+                  </ListItem>
+                  <ListItem>
+                    <Typography variant="p">
+                        Call: +254711346421</Typography>
+                  </ListItem>
+                  <ListItem>
+                    <Typography variant="p">
+                        Buy Goods: 9378773</Typography>
+                  </ListItem>
+                  {/* <ListItem>
+                    <Typography variant="p">
+                      Currently Delivering To:
+                    </Typography>
+                  </ListItem> */}
+                  {/* <ListItemButton
                     disabled
                     onMouseEnter={onLinkEnter}
                     onMouseLeave={onLinkLeave}
@@ -326,7 +374,7 @@ const BottomNav = () => {
                     onMouseLeave={onLinkLeave}
                   >
                     <ListItemText primary="Terms & Conditions" />
-                  </ListItemButton>
+                  </ListItemButton> */}
                 </List>
               </Grid>
             </Grid>
