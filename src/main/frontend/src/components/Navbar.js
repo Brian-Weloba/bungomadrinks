@@ -108,16 +108,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function onLinkEnter(e) {
-//   e.target.style.color = '#211F2A';
-//   e.target.style.animationDuration = "5s";
+  //   e.target.style.color = '#211F2A';
+  //   e.target.style.animationDuration = "5s";
 }
 
 function onLinkLeave(e) {
-//   e.target.style.color = "#211F2A";
+  //   e.target.style.color = "#211F2A";
 }
 
 function onMenuLinkLeave(e) {
-//   e.target.style.color = "#211F2A";
+  //   e.target.style.color = "#211F2A";
 }
 
 const Navbar = () => {

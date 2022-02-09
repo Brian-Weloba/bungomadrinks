@@ -31,11 +31,11 @@ const box = {
 };
 
 const box2 = {
-    paddingLeft: "16px",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-  };
+  paddingLeft: "16px",
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+};
 
 const Copyright = () => {
   return (
@@ -333,7 +333,7 @@ const BottomNav = () => {
             <Grid container>
               <Grid item>
                 <List>
-                <ListItem>
+                  <ListItem>
                     <Typography variant="p">Payment: On Delivery</Typography>
                   </ListItem>
                   <ListItem>
@@ -342,12 +342,10 @@ const BottomNav = () => {
                     </Typography>
                   </ListItem>
                   <ListItem>
-                    <Typography variant="p">
-                        Call: +254711346421</Typography>
+                    <Typography variant="p">Call: +254711346421</Typography>
                   </ListItem>
                   <ListItem>
-                    <Typography variant="p">
-                        Buy Goods: 9378773</Typography>
+                    <Typography variant="p">Buy Goods: 9378773</Typography>
                   </ListItem>
                   {/* <ListItem>
                     <Typography variant="p">

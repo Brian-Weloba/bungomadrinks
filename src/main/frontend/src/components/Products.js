@@ -39,7 +39,6 @@ const card = {
   justifyContent: "center",
   maxWidth: "250px",
   minWidth: "200px",
-
 };
 
 function onCardEnter(e) {
@@ -149,7 +148,7 @@ const Home = () => {
       return (
         <Grid item key={index}>
           <Card
-          className="cards"
+            className="cards"
             // sx={{width: 250, minWidth: 100, maxWidth: 250, height: "max-content" }}
             // variant="outlined"
             raised={true}
@@ -180,20 +179,23 @@ const Home = () => {
               }}
               disableTypography={true}
               title={
-                <h6  className="cardHeader">
+                <h6 className="cardHeader">
                   {" "}
                   {product.productName} - {optionVolume}{" "}
                 </h6>
               }
               subheader={
-                <h6     style={
-                    {
-                        fontSize: "20px",
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        color: "#a71e22",
-                    }
-                }> KES {optionPrice} </h6>
+                <h6
+                  style={{
+                    fontSize: "20px",
+                    marginTop: "0px",
+                    marginBottom: "0px",
+                    color: "#a71e22",
+                  }}
+                >
+                  {" "}
+                  KES {optionPrice}{" "}
+                </h6>
               }
             />{" "}
             <CardContent style={{ textAlign: "center" }}>
@@ -250,8 +252,8 @@ const Home = () => {
           // backgroundAttachment: 'scroll',
           // backgroundSize: 'cover',
           width: "100vw",
-        //   paddingLeft: "20px",
-        //   paddingRight: "20px",
+          //   paddingLeft: "20px",
+          //   paddingRight: "20px",
           // justifyContent: 'center',
           textAlign: "center",
           display: "inline-block",
