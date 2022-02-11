@@ -28,7 +28,7 @@ public class ProductOptionService {
         productOptionRepository.save(new ProductOption(4, "750ml", 1800, 10));
         productOptionRepository.save(new ProductOption(4, "1litre", 4600, 10));
         productOptionRepository.save(new ProductOption(5, "750ml", 1955, 10));
-        productOptionRepository.save(new ProductOption(6, "750ml", 7000, 10));
+        productOptionRepository.save(new ProductOption(6, "750ml",2400 , 10));
         productOptionRepository.save(new ProductOption(7,"1litre", 850, 10));
         productOptionRepository.save(new ProductOption(8,"750ml", 4500, 10));
         productOptionRepository.save(new ProductOption(9,"750ml", 7000, 10));
