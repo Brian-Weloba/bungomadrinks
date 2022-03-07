@@ -67,7 +67,7 @@
 //     const [products, setProducts] = useState([]);
 //
 //     const fetchProducts = () => {
-//         axios.get("http://209.97.144.225/api/products").then(response => {
+//         axios.get("https://bernyz.co.ke/api/products").then(response => {
 //             console.log(response);
 //             setProducts(response.data);
 //         });

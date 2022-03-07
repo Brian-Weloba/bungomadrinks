@@ -17,8 +17,8 @@ import "./Products.css";
 
 function Details() {
   let { id } = useParams();
-  let url = "http://209.97.144.225/api/products/" + id;
-  let prodOptionsUrl = "http://209.97.144.225/api/products/" + id + "/options";
+  let url = "https://bernyz.co.ke/api/products/" + id;
+  let prodOptionsUrl = "https://bernyz.co.ke/api/products/" + id + "/options";
 
   // let defaultOption = {};
   // let price = 0;
