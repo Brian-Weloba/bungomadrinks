@@ -80,7 +80,7 @@ function GetProducts(name) {
 
   const fetchProducts = () => {
     axios
-      .get(`http://209.97.144.225/api/products/categories/get?name=${name}`)
+      .get(`https://bernyz.co.ke/api/products/categories/get?name=${name}`)
       .then((response) => {
         // console.log(response);
         setProducts(response.data);
