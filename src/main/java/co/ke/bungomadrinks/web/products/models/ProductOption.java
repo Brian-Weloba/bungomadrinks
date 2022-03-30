@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SuppressWarnings("ALL")
 @Entity
 @Table(name = "product_options")
 public class ProductOption {
@@ -53,7 +54,7 @@ public class ProductOption {
     }
 
     public void setoptionVolume(String optionVolume) {
-        optionVolume = optionVolume;
+        this.optionVolume = optionVolume;
     }
 
     public float getproductOptionPrice() {
@@ -61,7 +62,7 @@ public class ProductOption {
     }
 
     public void setproductOptionPrice(float productOptionPrice) {
-        productOptionPrice = productOptionPrice;
+        this.productOptionPrice = productOptionPrice;
     }
 
     public long getProductId() {

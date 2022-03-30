@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class ProductCategoryRepository {
@@ -45,7 +46,7 @@ public class ProductCategoryRepository {
             productCategory1.setCategoryName(productCategory.getCategoryName());
         }
         if (productCategory.getCategoryDescription() != null) {
-            productCategory1.setCategoryDescription(productCategory.getCategoryDescription());
+            Objects.requireNonNull(productCategory1).setCategoryDescription(productCategory.getCategoryDescription());
         }
         entityManager.persist(productCategory1);
     }
