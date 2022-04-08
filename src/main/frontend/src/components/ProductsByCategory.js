@@ -147,10 +147,6 @@ const ProductsByCategory = () => {
       const optionPrice = getOptionPrice();
       const optionVolume = getOptionVolume();
 
-      // const defOption = defaultOption();
-      // console.log("viyrewgbiuvh")
-      // console.log(optionPrice);
-
       return (
         <Grid item key={index}>
           <Card

@@ -110,6 +110,9 @@ public class ProductRepository {
         List<Product> productsToReturn = new ArrayList<>();
         for (Product product : products) {
             if(product.getProductType().equalsIgnoreCase(name)) {
+                getCategories(product);
+                getOptions(product);
+                product.setStock();
                 productsToReturn.add(product);
             }
         }
