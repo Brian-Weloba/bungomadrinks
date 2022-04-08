@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @Table(name = "Products")
 public class Product {
@@ -114,38 +115,6 @@ public class Product {
     public void setProductName(String productName) {
         this.productName = productName;
     }
-
-//    public float getBasicProductPrice() {
-//        return basicProductPrice;
-//    }
-//
-//    public void setBasicProductPrice(float basicProductPrice) {
-//        this.basicProductPrice = basicProductPrice;
-//    }
-//
-//    public String getBasicUnitVolume() {
-//        return basicUnitVolume;
-//    }
-//
-//    public void setBasicUnitVolume(String basicUnitVolume) {
-//        this.basicUnitVolume = basicUnitVolume;
-//    }
-
-//    public String getProductShortDescription() {
-//        return productShortDescription;
-//    }
-//
-//    public void setProductShortDescription(String productShortDescription) {
-//        this.productShortDescription = productShortDescription;
-//    }
-//
-//    public String getProductLongDescription() {
-//        return productLongDescription;
-//    }
-//
-//    public void setProductLongDescription(String productLongDescription) {
-//        this.productLongDescription = productLongDescription;
-//    }
 
     public String getProductImage() {
         return productImage;
@@ -265,6 +234,7 @@ public class Product {
                 '}';
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void updateProductOption(Long optionId, ProductOption productOption) {
 
     }

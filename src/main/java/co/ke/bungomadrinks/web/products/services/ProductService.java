@@ -94,13 +94,6 @@ public class ProductService {
                 "johnnie-walker-green-label.jpg",
                 "Whisky"));
 
-//        prodRepository.saveProduct(new Product(
-//                "V&A",
-//                "With a rich tale behind the whisky dating back to 1902, V&A Whisky was manufactured to bring a high quality whisky at an affordable price.",
-//                //TODO: add image
-//                "v-a.jpg",
-//                "Whisky"));
-
         prodRepository.saveProduct(new Product(
                 "Hunter's Choice",
 15,

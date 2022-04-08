@@ -7,6 +7,7 @@ co\ke\bungomadrinks\web\products\controllers\ProductCategoriesController.class
 co\ke\bungomadrinks\web\products\services\ProductOptionService.class
 co\ke\bungomadrinks\web\products\repositories\ProductCategoryRepository.class
 co\ke\bungomadrinks\web\products\models\Product.class
+co\ke\bungomadrinks\web\SpringFoxConfig.class
 co\ke\bungomadrinks\web\products\models\ProductOption.class
 co\ke\bungomadrinks\web\products\controllers\ProductOptionsController.class
 co\ke\bungomadrinks\web\products\repositories\ProductOptionRepository.class

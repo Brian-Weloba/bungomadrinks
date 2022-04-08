@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @Table(name = "product_categories")
 public class ProductCategory {
@@ -59,7 +60,7 @@ public class ProductCategory {
     }
 
     public void setCategoryName(String categoryName) {
-        categoryName = categoryName;
+        this.categoryName = categoryName;
     }
 
     public String getCategoryDescription() {
